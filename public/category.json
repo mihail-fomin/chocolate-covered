@@ -1,0 +1,47 @@
+[
+  {
+    "title": "chocolate",
+    "rus": "Шоколад",
+    "image": "chocolate.png"
+  },
+  {
+    "title": "cupcakes",
+    "rus": "Капкейки",
+    "image": "cupcakes.png"
+  },
+  {
+    "title": "macarons",
+    "rus": "Макаронс",
+    "image": "macarons.png"
+  },
+  {
+    "title": "trifle",
+    "rus": "Трайфлы",
+    "image": "trifle.png"
+  },
+  {
+    "title": "cakes",
+    "rus": "Торты",
+    "image": "cakes.png"
+  },
+  {
+    "title": "bento",
+    "rus": "Бенто-торты",
+    "image": "bento.png"
+  },
+  {
+    "title": "cheese-cake",
+    "rus": "Чизкейк",
+    "image": "cheese-cake.png"
+  },
+  {
+    "title": "cake-pops",
+    "rus": "Кейк-попсы",
+    "image": "cake-pops.png"
+  },
+  {
+    "title": "marshmallow",
+    "rus": "Зефир",
+    "image": "marshmallow.png"
+  }
+]
