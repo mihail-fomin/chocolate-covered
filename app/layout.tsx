@@ -6,6 +6,7 @@ import NavBar from './NavBar'
 
 import './globals.css'
 import '@radix-ui/themes/styles.css'
+import Container from './components/Container'
 
 export const metadata: Metadata = {
   title: 'Все в шоколаде',
@@ -22,9 +23,11 @@ export default function RootLayout({
       <body>
         <Theme accentColor="ruby">
           <Header />
-          <NavBar />
-          {children}
-          {/* <ThemePanel /> */}
+          <Container>
+            <NavBar />
+            {children}
+            {/* <ThemePanel /> */}
+          </Container>
         </Theme>
       </body>
     </html>
