@@ -1,6 +1,11 @@
 import React from 'react'
 import type { Metadata } from 'next'
+import { Theme, ThemePanel } from '@radix-ui/themes';
+import Header from './components/Header';
+import NavBar from './components/NavBar';
+
 import './globals.css'
+import '@radix-ui/themes/styles.css';
 
 
 export const metadata: Metadata = {
@@ -16,7 +21,13 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body>
-        {children}
+        <Theme accentColor="ruby">
+          <Header />
+          <NavBar />
+          {children}
+        {/* <ThemePanel /> */}
+        </Theme>
+
       </body>
     </html>
   )
