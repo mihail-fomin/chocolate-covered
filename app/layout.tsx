@@ -1,8 +1,8 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import { Theme } from '@radix-ui/themes'
-import Header from './components/Header'
-import NavBar from './components/NavBar'
+import Header from './Header'
+import NavBar from './NavBar'
 
 import './globals.css'
 import '@radix-ui/themes/styles.css'

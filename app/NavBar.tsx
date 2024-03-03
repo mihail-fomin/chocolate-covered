@@ -1,11 +1,11 @@
 'use client'
 
 import React from 'react'
-import categories from '../../public/category.json'
+import categories from '../public/category.json'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '@radix-ui/themes'
-import Container from './Container'
+import Container from './components/Container'
 
 const NavBar = () => {
   const currentPath = usePathname()
