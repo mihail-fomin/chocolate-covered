@@ -1,36 +1,9 @@
-import * as React from 'react'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
+import React from 'react'
 
-interface TabPanelProps {
-  children?: React.ReactNode
-  index: number
-  value: number
-}
-
-export function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props
-
+const NavBar = () => {
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
+    <div>123</div>
   )
 }
 
-export function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  }
-}
+export default NavBar
