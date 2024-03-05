@@ -11,10 +11,10 @@ model Product {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   price       Float
-  weight      Float?
+  weight      Float
   description String?
-  category    String?
-  imageUrl    String?
+  category    String
+  imageUrl    String
   // comments    Comment[]
 }
 
