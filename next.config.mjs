@@ -7,9 +7,9 @@ const nextConfig = {
         hostname: 'ik.imagekit.io',
         port: '',
         pathname: '**',
-      }
-    ]
-  }
+      },
+    ],
+  },
 }
 
 export default nextConfig
