@@ -1,5 +1,8 @@
+'use client'
+
 import { Button } from '@radix-ui/themes'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation';
 import React from 'react'
 
 interface Props {
@@ -8,10 +11,12 @@ interface Props {
     rus: string;
     image: string;
   }
-  currentPath: string
 }
 
-const NavLink = ({ category, currentPath }: Props) => {
+const NavLink = ({ category }: Props) => {
+  const currentPath = usePathname()
+
+
   return (
     <li key={category.href} className='whitespace-nowrap'>
     <Button
