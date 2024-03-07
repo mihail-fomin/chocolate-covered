@@ -11,13 +11,18 @@ const ProductCard = ({ product }: Props) => {
   return (
     <li className="max-w-72 h-full">
       <Card className="h-full">
-        <Image
-          width={300}
-          height={300}
-          src={product.imageUrl}
-          alt="Картинка десерта"
-        />
-        <h2 className="">{product.title}</h2>
+        <div className="relative h-120 overflow-hidden rounded-lg">
+          <Image
+            className="object-cover w-full h-full rounded-lg transition duration-1000 hover:scale-125"
+            width={120}
+            height={120}
+            src={product.imageUrl}
+            alt="Картинка десерта"
+          />
+        </div>
+        <h2 className="mt-2">{product.title}</h2>
+        <h3 className="mt-2">{product.price}&nbsp;₽</h3>
+        <p>{product.weight}&nbsp;г</p>
       </Card>
     </li>
   )
