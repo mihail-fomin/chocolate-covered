@@ -2,8 +2,6 @@ import React from 'react'
 import type { Metadata } from 'next'
 import { Theme } from '@radix-ui/themes'
 import Header from './Header'
-import NavBar from './NavBar'
-
 import './globals.css'
 import '@radix-ui/themes/styles.css'
 import Container from './components/Container'
@@ -24,7 +22,6 @@ export default function RootLayout({
         <Theme accentColor="ruby">
           <Header />
           <Container>
-            <NavBar />
             {children}
             {/* <ThemePanel /> */}
           </Container>

@@ -3,7 +3,7 @@ import categories from '../public/category.json'
 import { Box, Flex, ScrollArea } from '@radix-ui/themes'
 import NavLink from './components/NavLink'
 
-const NavBar = () => {
+const Categories = () => {
   return (
     <ScrollArea
       type="always"
@@ -21,4 +21,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+export default Categories
