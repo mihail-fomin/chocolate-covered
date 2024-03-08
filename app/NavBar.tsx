@@ -1,6 +1,6 @@
 import React from 'react'
 import categories from '../public/category.json'
-import { Box, ScrollArea } from '@radix-ui/themes'
+import { Box, Flex, ScrollArea } from '@radix-ui/themes'
 import NavLink from './components/NavLink'
 
 const NavBar = () => {
@@ -10,13 +10,13 @@ const NavBar = () => {
       scrollbars="horizontal"
       style={{ height: '4rem' }}
     >
-      <Box p="2">
+      <Flex p="2" justify="center">
         <ul className="flex gap-3">
           {categories.map((category) => (
-            <NavLink category={category} />
+            <NavLink key={category.rus} category={category} />
           ))}
         </ul>
-      </Box>
+      </Flex>
     </ScrollArea>
   )
 }
