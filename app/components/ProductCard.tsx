@@ -1,7 +1,7 @@
 import { Product } from '@prisma/client'
-import { Button, Card } from '@radix-ui/themes'
 import Image from 'next/image'
 import React from 'react'
+import AddtoCartButton from './AddtoCartButton'
 
 interface Props {
   product: Product
@@ -22,7 +22,7 @@ const ProductCard = ({ product }: Props) => {
       <div className="flex flex-col flex-grow justify-between gap-4 p-2">
         <h2 className="mt-1 text-xs">{product.title}</h2>
         <div className="flex justify-between items-end">
-          <Button variant="soft">{product.price}&nbsp;₽</Button>
+          <AddtoCartButton price={product.price} />
           <p>{product.weight}&nbsp;г</p>
         </div>
       </div>
