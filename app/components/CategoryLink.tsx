@@ -13,7 +13,7 @@ interface Props {
   }
 }
 
-const NavLink = ({ category }: Props) => {
+const CategoryLink = ({ category }: Props) => {
   const currentPath = usePathname()
 
   return (
@@ -21,6 +21,7 @@ const NavLink = ({ category }: Props) => {
       <Button
         variant={category.href === currentPath ? 'solid' : 'outline'}
         radius="full"
+        onClick={() => {}}
       >
         <Link href={category.href}>{category.rus}</Link>
       </Button>
@@ -28,4 +29,4 @@ const NavLink = ({ category }: Props) => {
   )
 }
 
-export default NavLink
+export default CategoryLink
