@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { RootState } from '../../store'
 
 export const categorySlice = createSlice({
   name: 'category',
@@ -14,5 +13,3 @@ export const categorySlice = createSlice({
 })
 
 export const { setActiveCategory } = categorySlice.actions
-export const selectActiveCategoryName = (state: RootState) =>
-  state.category.activeCategory
