@@ -1,10 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit'
+'use client'
+import { useRef } from 'react'
+import { Provider } from 'react-redux'
+import { makeStore, AppStore } from './lib/store'
 
-export const store = configureStore({
-  reducer: {},
-})
+export default function StoreProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const storeRef = useRef<AppStore>()
+  if (!storeRef.current) {
+    // Create the store instance the first time this renders
+    storeRef.current = makeStore()
+  }
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+  return <Provider store={storeRef.current}>{children}</Provider>
+}
