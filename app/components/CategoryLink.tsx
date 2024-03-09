@@ -4,10 +4,12 @@ import React from 'react'
 import { Button } from '@radix-ui/themes'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useAppDispatch } from '../lib/hooks'
+import { setActiveCategory } from '../lib/feature/category/categorySlice'
 
 interface Props {
   category: {
-    href: string
+    title: string
     rus: string
     image: string
   }
@@ -15,15 +17,21 @@ interface Props {
 
 const CategoryLink = ({ category }: Props) => {
   const currentPath = usePathname()
+  const dispatch = useAppDispatch()
+  const href = `/categories/${category.title}`
+
+  const handleCategoryClick = () => {
+    dispatch(setActiveCategory({ categoryName: category.title }))
+  }
 
   return (
-    <li key={category.href} className="whitespace-nowrap">
+    <li key={category.title} className="whitespace-nowrap">
       <Button
-        variant={category.href === currentPath ? 'solid' : 'outline'}
+        variant={href === currentPath ? 'solid' : 'outline'}
         radius="full"
-        onClick={() => {}}
+        onClick={handleCategoryClick}
       >
-        <Link href={category.href}>{category.rus}</Link>
+        <Link href={href}>{category.rus}</Link>
       </Button>
     </li>
   )
