@@ -2,25 +2,29 @@
 
 import React from 'react'
 import { Button } from '@radix-ui/themes'
+import { useAppDispatch } from '../lib/hooks'
+import { addToCart } from '../lib/feature/cart/cartSlice'
+import { Product } from '@prisma/client'
 
 interface Props {
-  price: number
+  product: Product
 }
 
-const AddtoCartButton = ({ price }: Props) => {
+const AddtoCartButton = ({ product }: Props) => {
   const [hovered, setHovered] = React.useState(false)
+  const dispatch = useAppDispatch()
 
-  // const handleAddClick = () => {
-  //   setQuantity(quantity => quantity++)
-  // }
+  const handleAddClick = () => {
+    dispatch(addToCart(product))
+  }
 
-  const priceBadge = `${price} ₽`
+  const priceBadge = `${product.price} ₽`
   return (
     <Button
       variant="soft"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      // onClick={handleAddClick}
+      onClick={handleAddClick}
     >
       {hovered ? 'Купить' : priceBadge}
     </Button>

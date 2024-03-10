@@ -22,7 +22,7 @@ const ProductCard = ({ product }: Props) => {
       <div className="flex flex-col flex-grow justify-between gap-4 p-2">
         <h2 className="mt-1 text-xs">{product.title}</h2>
         <div className="flex justify-between items-end">
-          <AddtoCartButton price={product.price} />
+          <AddtoCartButton product={product} />
           <p>{product.weight}&nbsp;г</p>
         </div>
       </div>
