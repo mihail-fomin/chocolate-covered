@@ -4,12 +4,15 @@ import React from 'react'
 import { Avatar, Button, Card, Dialog, Flex, Text } from '@radix-ui/themes'
 import { useAppSelector } from '../lib/hooks'
 import { getTotalPrice } from '../utils'
+import Order from './Order'
 
 const Cart = () => {
   const products = useAppSelector((state) => state.cart.items)
+  const [openCart, setOpenCart] = React.useState(false);
+
 
   return (
-    <Dialog.Root>
+    <Dialog.Root  open={openCart} onOpenChange={setOpenCart}>
       <Dialog.Trigger>
         <Button>Корзина</Button>
       </Dialog.Trigger>
@@ -55,9 +58,9 @@ const Cart = () => {
               Закрыть
             </Button>
           </Dialog.Close>
-          <Dialog.Close>
-            <Button>Заказать</Button>
-          </Dialog.Close>
+
+          <Order setOpenCart={setOpenCart}/>
+
         </Flex>
       </Dialog.Content>
     </Dialog.Root>
