@@ -8,11 +8,10 @@ import Order from './Order'
 
 const Cart = () => {
   const products = useAppSelector((state) => state.cart.items)
-  const [openCart, setOpenCart] = React.useState(false);
-
+  const [openCart, setOpenCart] = React.useState(false)
 
   return (
-    <Dialog.Root  open={openCart} onOpenChange={setOpenCart}>
+    <Dialog.Root open={openCart} onOpenChange={setOpenCart}>
       <Dialog.Trigger>
         <Button>Корзина</Button>
       </Dialog.Trigger>
@@ -59,8 +58,7 @@ const Cart = () => {
             </Button>
           </Dialog.Close>
 
-          <Order setOpenCart={setOpenCart}/>
-
+          <Order disabled={products.length === 0} setOpenCart={setOpenCart} />
         </Flex>
       </Dialog.Content>
     </Dialog.Root>
