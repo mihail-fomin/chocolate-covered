@@ -23,13 +23,13 @@ const Order = ({ setOpenCart, disabled }: Props) => {
       </Dialog.Trigger>
       <Dialog.Content>
         <Dialog.Title>Заказ</Dialog.Title>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input type="submit" />
-
+        <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
           <InputFields register={register} errors={errors} />
-        </form>
 
-        <Flex direction="column" gap="3" mb="3"></Flex>
+          <Button mt="4" type="submit">
+            Отправить
+          </Button>
+        </form>
 
         <Flex justify="end">
           <Dialog.Close>
