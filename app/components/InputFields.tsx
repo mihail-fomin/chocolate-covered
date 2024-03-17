@@ -1,16 +1,23 @@
-import { TextField } from '@radix-ui/themes'
+import { Flex, RadioGroup, Text, TextArea, TextField } from '@radix-ui/themes'
 import React from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { ErrorMessage } from '@hookform/error-message'
 
 type Props = {
   register: UseFormRegister<IFormValues>
   errors: FieldErrors
 }
 
+enum InputType {
+  Text = 'TEXT',
+  Textarea = 'TEXTAREA',
+  Radio = 'RADIO',
+}
+
 type InputProps = {
+  type: InputType
+  label?: string
   name: keyof IFormValues
-  placeholder: string
+  placeholder?: string
   register: UseFormRegister<IFormValues>
   required?: boolean
   pattern?: {
@@ -21,13 +28,17 @@ type InputProps = {
   error?: any
 }
 
+
 export interface IFormValues {
   name: string
   phone: string
   address: string
+  format: string
 }
 
 const Input = ({
+  type,
+  label,
   name,
   placeholder,
   register,
@@ -35,17 +46,38 @@ const Input = ({
   pattern,
   maxLength,
   error,
-  // invalidText,
 }: InputProps) => (
+
+
   <div>
-    <TextField.Input
-      placeholder={placeholder}
-      {...register(name, {
-        required,
-        pattern,
-        maxLength,
-      })}
-    />
+    {label && <Text as='label'>{label}</Text>}
+    {type === InputType.Text ? (
+      <TextField.Input
+        placeholder={placeholder}
+        {...register(name, {
+          required,
+          pattern,
+          maxLength,
+        })}
+      />
+    ) : type === InputType.Radio ? (
+    <RadioGroup.Root defaultValue="delivery" {...register(name)}>
+      <Flex gap="2" direction="column">
+        <Text as="label" size="2">
+          <Flex gap="2">
+          <RadioGroup.Item value="delivery"/> Доставка
+        </Flex>
+        </Text>
+        <Text as="label" size="2">
+          <Flex gap="2">
+          <RadioGroup.Item value="pickup"/> Самовывоз
+          </Flex>
+        </Text>
+      </Flex>
+    </RadioGroup.Root>
+    ) : (
+      <TextArea></TextArea>
+    )}
     {error?.type === 'required' && (
       <span className="text-red-500">Заполните данное поле</span>
     )}
@@ -62,6 +94,7 @@ const Input = ({
 
 const createInputs = (register: UseFormRegister<IFormValues>) => [
   {
+    type: InputType.Text,
     name: 'name',
     placeholder: 'Имя',
     register: register,
@@ -73,6 +106,7 @@ const createInputs = (register: UseFormRegister<IFormValues>) => [
     maxLength: 32,
   },
   {
+    type: InputType.Text,
     name: 'phone',
     placeholder: 'Телефон',
     register: register,
@@ -83,6 +117,7 @@ const createInputs = (register: UseFormRegister<IFormValues>) => [
     },
   },
   {
+    type: InputType.Text,
     name: 'address',
     placeholder: 'Адрес',
     register: register,
@@ -90,6 +125,12 @@ const createInputs = (register: UseFormRegister<IFormValues>) => [
     maxLength: 256,
   },
   {
+    type: InputType.Radio,
+    name: 'format',
+    register: register,
+  },
+  {
+    type: InputType.Textarea,
     name: 'comments',
     placeholder: 'Комментарии к заказу',
     register: register,
@@ -105,6 +146,7 @@ const InputFields = ({ register, errors }: Props) => {
     <>
       {inputs.map((input) => (
         <Input
+          type={input.type}
           key={input.name}
           name={input.name as keyof IFormValues}
           placeholder={input.placeholder}
