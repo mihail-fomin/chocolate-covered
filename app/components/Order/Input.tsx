@@ -1,6 +1,7 @@
 import { Flex, RadioGroup, Text, TextArea, TextField } from '@radix-ui/themes';
 import React from 'react';
 import { InputProps, InputType } from './InputFields';
+import ErrorMessage from './ErrorMessage';
 
 export const Input = ({
   type, label, name, placeholder, register, required, pattern, maxLength, error,
@@ -47,17 +48,7 @@ export const Input = ({
       ) : (
         <TextArea></TextArea>
       )}
-      {error?.type === 'required' && (
-        <span className="text-red-500">Заполните данное поле</span>
-      )}
-      {error?.type === 'pattern' && (
-        <span className="text-red-500">{pattern?.message}</span>
-      )}
-      {error?.type === 'maxLength' && (
-        <span className="text-red-500">
-          Максимальная длина - {maxLength} символа
-        </span>
-      )}
+      {error && <ErrorMessage type={error.type} message={error.message} />}
     </div>
   );
 };

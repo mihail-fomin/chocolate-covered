@@ -10,7 +10,7 @@ export const CreateInputs = (register: UseFormRegister<IFormValues>) => [
     required: true,
     pattern: {
       value: /^[-A-ZА-Я' ]+?$/iu,
-      message: 'Имя может содержать только латинницу',
+      message: 'Имя не может содержать цифры или спецсимволы',
     },
     maxLength: 32,
   },
