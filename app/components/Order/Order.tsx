@@ -12,6 +12,7 @@ const Order = ({ setOpenCart, disabled }: Props) => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<IFormValues>()
   const onSubmit: SubmitHandler<IFormValues> = (data) => console.log(data)
@@ -24,7 +25,7 @@ const Order = ({ setOpenCart, disabled }: Props) => {
       <Dialog.Content>
         <Dialog.Title>Заказ</Dialog.Title>
         <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
-          <InputFields register={register} errors={errors} />
+          <InputFields register={register} errors={errors} watch={watch}/>
 
           <Button mt="4" type="submit">
             Отправить

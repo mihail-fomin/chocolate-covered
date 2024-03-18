@@ -4,7 +4,7 @@ import React from 'react'
 import { Avatar, Button, Card, Dialog, Flex, Text } from '@radix-ui/themes'
 import { useAppSelector } from '../lib/hooks'
 import { getTotalPrice } from '../utils'
-import Order from './Order'
+import Order from './Order/Order'
 
 const Cart = () => {
   const products = useAppSelector((state) => state.cart.items)
