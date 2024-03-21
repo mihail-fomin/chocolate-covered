@@ -5,7 +5,7 @@ import Container from './components/Container'
 import Link from 'next/link'
 import { Flex } from '@radix-ui/themes'
 import Image from 'next/image'
-import Cart from './components/Cart'
+import Cart from './components/Cart/Cart'
 
 const Header: React.FC = () => {
   return (

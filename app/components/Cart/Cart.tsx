@@ -1,14 +1,27 @@
 'use client'
 
 import React from 'react'
-import { Avatar, Button, Card, Dialog, Flex, Text } from '@radix-ui/themes'
-import { useAppSelector } from '../lib/hooks'
-import { getTotalPrice } from '../utils'
-import Order from './Order/Order'
+import { Avatar, Box, Button, Card, Dialog, Flex, Text } from '@radix-ui/themes'
+import { useAppDispatch, useAppSelector } from '../../lib/hooks'
+import { getTotalPrice } from '../../utils'
+import Order from '../Order/Order'
+import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
+import { incrementQuantity, decrementQuantity } from '../../lib/feature/cart/cartSlice'
+import { Product } from '@prisma/client'
 
 const Cart = () => {
   const products = useAppSelector((state) => state.cart.items)
   const [openCart, setOpenCart] = React.useState(false)
+  
+  const dispatch = useAppDispatch()
+
+  const handleDecrement = (product: Product) => {
+    dispatch(decrementQuantity(product))
+  }
+
+  const handleIncrement = (product: Product) => {
+    dispatch(incrementQuantity(product))
+  }
 
   return (
     <Dialog.Root open={openCart} onOpenChange={setOpenCart}>
@@ -27,18 +40,26 @@ const Cart = () => {
                   <Card>
                     <Flex gap="3" align="center">
                       <Avatar
-                        size="3"
+                        size="5"
                         src={product.imageUrl}
-                        radius="full"
+                        radius="small"
                         fallback="T"
                       />
                       <Flex className="w-full" justify="between">
                         <Text as="div" size="2" weight="bold">
                           {product.title}
                         </Text>
-                        <Text as="div" size="2" color="gray">
-                          {product.quantity} шт
-                        </Text>
+                        <Flex p='2' gap='1' align='center'>
+                          <Box className='p-2 hover:bg-slate-200 rounded' onClick={() => handleDecrement(product)}>
+                            <MinusIcon />
+                          </Box>
+                          <Text as="div" size="2" color="gray"  className='border-2 rounded py-2 px-4'>
+                            {product.quantity}
+                          </Text>
+                          <Box className='p-2 hover:bg-slate-200 rounded'  onClick={() => handleIncrement(product)}>
+                            <PlusIcon />
+                          </Box>
+                        </Flex>
                       </Flex>
                     </Flex>
                   </Card>
@@ -53,7 +74,7 @@ const Cart = () => {
 
         <Flex gap="3" mt="4" justify="end">
           <Dialog.Close>
-            <Button variant="soft" color="gray">
+            <Button variant="soft" color="gray" className='gray-btn'>
               Закрыть
             </Button>
           </Dialog.Close>
