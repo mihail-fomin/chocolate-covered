@@ -1,5 +1,5 @@
-import { UseFormRegister } from 'react-hook-form';
-import { IFormValues, InputType } from './InputFields';
+import { UseFormRegister } from 'react-hook-form'
+import { IFormValues, InputType } from './InputFields'
 
 export const CreateInputs = (register: UseFormRegister<IFormValues>) => [
   {
@@ -46,4 +46,4 @@ export const CreateInputs = (register: UseFormRegister<IFormValues>) => [
     required: false,
     maxLength: 256,
   },
-];
+]

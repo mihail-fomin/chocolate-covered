@@ -31,18 +31,18 @@ export type InputProps = {
   error?: any
 }
 
-
 export interface IFormValues {
   name: string
   phone: string
   address: string
   format: string
+  entrance: number
   floor: number
   intercom: string | number
+  comments: string
 }
 
 const InputFields = ({ register, errors }: Props) => {
-
   const inputs = CreateInputs(register)
   return (
     <>

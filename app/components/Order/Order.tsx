@@ -2,6 +2,8 @@ import React from 'react'
 import { Button, Dialog, Flex } from '@radix-ui/themes'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import InputFields, { IFormValues } from './InputFields'
+import { useAppSelector } from '@/app/lib/hooks'
+import axios from 'axios'
 
 interface Props {
   setOpenCart: React.Dispatch<React.SetStateAction<boolean>>
@@ -15,7 +17,25 @@ const Order = ({ setOpenCart, disabled }: Props) => {
     watch,
     formState: { errors },
   } = useForm<IFormValues>()
-  const onSubmit: SubmitHandler<IFormValues> = (data) => console.log(data)
+  const [loading, setLoading] = React.useState(false)
+  const productArray = useAppSelector((state) => state.cart.items)
+
+  const onSubmit: SubmitHandler<IFormValues> = async (data) => {
+    setLoading(true)
+    try {
+      const response = await axios.post('/api/message', {
+        productArray,
+        orderData: data,
+      })
+      console.log(response.data)
+      setOpenCart(false)
+    } catch (error) {
+      console.error(error)
+      // handle error
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <Dialog.Root>
@@ -25,20 +45,16 @@ const Order = ({ setOpenCart, disabled }: Props) => {
       <Dialog.Content>
         <Dialog.Title>Заказ</Dialog.Title>
         <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
-          <InputFields register={register} errors={errors} watch={watch}/>
+          <InputFields register={register} errors={errors} watch={watch} />
 
-          <Button mt="4" type="submit">
-            Отправить
-          </Button>
-        </form>
-
-        <Flex justify="end">
-          <Dialog.Close>
-            <Button onClick={() => setOpenCart(false)} variant="soft">
-              Заказать
+          <Flex justify="end">
+            {/* <Dialog.Close> */}
+            <Button mt="4" type="submit">
+              Отправить
             </Button>
-          </Dialog.Close>
-        </Flex>
+            {/* </Dialog.Close> */}
+          </Flex>
+        </form>
       </Dialog.Content>
     </Dialog.Root>
   )

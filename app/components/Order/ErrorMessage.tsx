@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 interface Props {
   type: string
@@ -12,7 +12,7 @@ const ErrorMessage = ({ type, message }: Props) => {
       {type === 'pattern' && message}
       {type === 'maxLength' && `Максимальная длина - ${message} символа`}
     </span>
-  );
-};
+  )
+}
 
-export default ErrorMessage;
+export default ErrorMessage
