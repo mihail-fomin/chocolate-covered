@@ -1,9 +1,9 @@
 import { UseFormRegister } from 'react-hook-form'
-import { IFormValues, InputType } from './InputFields'
+import { IFormValues } from './InputFields'
 
 export const CreateInputs = (register: UseFormRegister<IFormValues>) => [
   {
-    type: InputType.Text,
+    type: 'text',
     name: 'name',
     placeholder: 'Имя',
     register: register,
@@ -15,7 +15,7 @@ export const CreateInputs = (register: UseFormRegister<IFormValues>) => [
     maxLength: 32,
   },
   {
-    type: InputType.Text,
+    type: 'text',
     name: 'phone',
     placeholder: 'Телефон',
     register: register,
@@ -26,7 +26,7 @@ export const CreateInputs = (register: UseFormRegister<IFormValues>) => [
     },
   },
   {
-    type: InputType.Text,
+    type: 'text',
     name: 'address',
     placeholder: 'Адрес',
     register: register,
@@ -34,12 +34,12 @@ export const CreateInputs = (register: UseFormRegister<IFormValues>) => [
     maxLength: 256,
   },
   {
-    type: InputType.Radio,
+    type: 'radio',
     name: 'format',
     register: register,
   },
   {
-    type: InputType.Textarea,
+    type: 'textarea',
     name: 'comments',
     placeholder: 'Комментарии к заказу',
     register: register,

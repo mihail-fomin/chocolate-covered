@@ -1,6 +1,6 @@
 import { Flex, RadioGroup, Text, TextArea, TextField } from '@radix-ui/themes'
 import React from 'react'
-import { InputProps, InputType } from './InputFields'
+import { InputProps } from './InputFields'
 import ErrorMessage from './ErrorMessage'
 
 export const Input = ({
@@ -19,7 +19,7 @@ export const Input = ({
   return (
     <div>
       {label && <Text as="label">{label}</Text>}
-      {type === InputType.Text ? (
+      {type === 'text' ? (
         <TextField.Input
           placeholder={placeholder}
           {...register(name, {
@@ -28,7 +28,7 @@ export const Input = ({
             maxLength,
           })}
         />
-      ) : type === InputType.Radio ? (
+      ) : type === 'radio' ? (
         <>
           <RadioGroup.Root defaultValue="delivery" {...register(name)}>
             <Flex gap="2" direction="column">
