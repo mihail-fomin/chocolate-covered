@@ -39,7 +39,7 @@ const Order = ({ setOpenCart, disabled }: Props) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button disabled={disabled}>Заказать</Button>
+        <Button className='general-btn' disabled={disabled}>Заказать</Button>
       </Dialog.Trigger>
       <Dialog.Content>
         <Dialog.Title>Заказ</Dialog.Title>
@@ -47,7 +47,7 @@ const Order = ({ setOpenCart, disabled }: Props) => {
           <InputFields register={register} errors={errors} watch={watch} />
 
           <Flex justify="end">
-            <Button mt="4" type="submit">
+            <Button mt="4" type="submit" className='general-btn'>
               Отправить
             </Button>
           </Flex>
