@@ -9,14 +9,8 @@ type Props = {
   watch: UseFormWatch<IFormValues>
 }
 
-export enum InputType {
-  Text = 'TEXT',
-  Textarea = 'TEXTAREA',
-  Radio = 'RADIO',
-}
-
 export type InputProps = {
-  type: InputType
+  type: string
   label?: string
   name: keyof IFormValues
   placeholder?: string

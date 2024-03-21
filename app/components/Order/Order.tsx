@@ -17,11 +17,11 @@ const Order = ({ setOpenCart, disabled }: Props) => {
     watch,
     formState: { errors },
   } = useForm<IFormValues>()
-  const [loading, setLoading] = React.useState(false)
+//   const [loading, setLoading] = React.useState(false)
   const productArray = useAppSelector((state) => state.cart.items)
 
   const onSubmit: SubmitHandler<IFormValues> = async (data) => {
-    setLoading(true)
+    // setLoading(true)
     try {
       const response = await axios.post('/api/message', {
         productArray,
@@ -31,9 +31,8 @@ const Order = ({ setOpenCart, disabled }: Props) => {
       setOpenCart(false)
     } catch (error) {
       console.error(error)
-      // handle error
     } finally {
-      setLoading(false)
+    //   setLoading(false)
     }
   }
 
@@ -48,11 +47,9 @@ const Order = ({ setOpenCart, disabled }: Props) => {
           <InputFields register={register} errors={errors} watch={watch} />
 
           <Flex justify="end">
-            {/* <Dialog.Close> */}
             <Button mt="4" type="submit">
               Отправить
             </Button>
-            {/* </Dialog.Close> */}
           </Flex>
         </form>
       </Dialog.Content>

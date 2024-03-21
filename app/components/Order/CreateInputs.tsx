@@ -21,7 +21,7 @@ export const CreateInputs = (register: UseFormRegister<IFormValues>) => [
     register: register,
     required: true,
     pattern: {
-      value: /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
+      value: /^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{7,10}$/,
       message: 'Введите корректый телефон',
     },
   },
