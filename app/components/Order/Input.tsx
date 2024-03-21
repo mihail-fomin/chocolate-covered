@@ -35,6 +35,7 @@ export const Input = ({
               <Text as="label" size="2">
                 <Flex gap="2">
                   <RadioGroup.Item
+                    className="RadioGroupItem"
                     value="delivery"
                     onClick={() => {
                       setFormat('delivery')
@@ -46,6 +47,7 @@ export const Input = ({
               <Text as="label" size="2">
                 <Flex gap="2">
                   <RadioGroup.Item
+                    className="RadioGroupItem"
                     value="pickup"
                     onClick={() => {
                       setFormat('pickup')
