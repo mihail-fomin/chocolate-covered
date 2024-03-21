@@ -13,7 +13,7 @@ const Cart = () => {
   return (
     <Dialog.Root open={openCart} onOpenChange={setOpenCart}>
       <Dialog.Trigger>
-        <Button className='general-btn'>Корзина</Button>
+        <Button className="general-btn">Корзина</Button>
       </Dialog.Trigger>
 
       <Dialog.Content>

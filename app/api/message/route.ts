@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sendOrder } from '@/app/utils/telegram'
 
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -13,4 +12,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid issue' }, { status: 400 })
   }
 }
-

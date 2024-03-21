@@ -17,7 +17,7 @@ const Order = ({ setOpenCart, disabled }: Props) => {
     watch,
     formState: { errors },
   } = useForm<IFormValues>()
-//   const [loading, setLoading] = React.useState(false)
+  //   const [loading, setLoading] = React.useState(false)
   const productArray = useAppSelector((state) => state.cart.items)
 
   const onSubmit: SubmitHandler<IFormValues> = async (data) => {
@@ -32,14 +32,16 @@ const Order = ({ setOpenCart, disabled }: Props) => {
     } catch (error) {
       console.error(error)
     } finally {
-    //   setLoading(false)
+      //   setLoading(false)
     }
   }
 
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button className='general-btn' disabled={disabled}>Заказать</Button>
+        <Button className="general-btn" disabled={disabled}>
+          Заказать
+        </Button>
       </Dialog.Trigger>
       <Dialog.Content>
         <Dialog.Title>Заказ</Dialog.Title>
@@ -47,7 +49,7 @@ const Order = ({ setOpenCart, disabled }: Props) => {
           <InputFields register={register} errors={errors} watch={watch} />
 
           <Flex justify="end">
-            <Button mt="4" type="submit" className='general-btn'>
+            <Button mt="4" type="submit" className="general-btn">
               Отправить
             </Button>
           </Flex>

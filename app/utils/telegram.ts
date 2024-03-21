@@ -12,30 +12,30 @@ if (telegramToken) {
 
 // Функция для отправки сообщения в Telegram
 export function sendTelegramMessage(message: string) {
-    const chatId = '-1001759583869'
-  
-    bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
+  const chatId = '-1001759583869'
+
+  bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
 }
 
 // Функция для обработки массива объектов и отправки сообщений
 export const sendOrder = async (
-    productArray: CartItem[],
-    orderData: IFormValues,
-  ) => {
-    try {
-      const {
-        name,
-        phone,
-        address,
-        format,
-        entrance,
-        floor,
-        intercom,
-        comments,
-      } = orderData
-      let totalSum = 0
-      let totalCount = 0
-      let message = `
+  productArray: CartItem[],
+  orderData: IFormValues,
+) => {
+  try {
+    const {
+      name,
+      phone,
+      address,
+      format,
+      entrance,
+      floor,
+      intercom,
+      comments,
+    } = orderData
+    let totalSum = 0
+    let totalCount = 0
+    let message = `
       <strong>Заявка с сайта</strong>
       <b>Отправитель:</b> <i>${name}</i>
       <b>Телефон:</b> <i>${phone}</i>
@@ -51,19 +51,19 @@ export const sendOrder = async (
       ${comments.length > 0 ? `<b> Комментарии к заказу:</b> <i>${comments}</i>` : ``}
       <b> Товары: </>
       `
-  
-      for (const productItem of productArray) {
-        const productAmount = productItem.quantity
-        message += `<b>${productItem.title}</> в количестве <b>${productAmount}</>шт., 
+
+    for (const productItem of productArray) {
+      const productAmount = productItem.quantity
+      message += `<b>${productItem.title}</> в количестве <b>${productAmount}</>шт., 
         `
-        totalSum += Number(productItem.price) * Number(productAmount)
-        totalCount += Number(productAmount)
-      }
-  
-      message += `<b> Итого: </> ${totalCount} товаров на сумму <b>${totalSum}</>руб.`
-  
-      sendTelegramMessage(message)
-    } catch (error) {
-      console.error(error)
+      totalSum += Number(productItem.price) * Number(productAmount)
+      totalCount += Number(productAmount)
     }
+
+    message += `<b> Итого: </> ${totalCount} товаров на сумму <b>${totalSum}</>руб.`
+
+    sendTelegramMessage(message)
+  } catch (error) {
+    console.error(error)
   }
+}
