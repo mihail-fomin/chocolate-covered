@@ -24,8 +24,8 @@ export const cartMiddleware: Middleware = (store) => (next) => (action: any) => 
   return result
 }
 
-const cartItems = localStorage.getItem('cart');
-const parsedCartItems = cartItems ? JSON.parse(cartItems) : [];
+const cartItems = typeof window !== 'undefined' ? localStorage.getItem('cart') : null;
+const parsedCartItems: CartItem[] = cartItems ? JSON.parse(cartItems) : [];
 
 
 const initialState = {
