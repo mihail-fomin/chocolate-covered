@@ -1,12 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, Middleware } from '@reduxjs/toolkit'
 import { Product } from '@prisma/client'
 
 export interface CartItem extends Product {
   quantity: number
 }
 
+
+export const cartMiddleware: Middleware = (store) => (next) => (action: any) => {
+  const result = next(action) // Call next middleware or reducer first
+
+  if (
+    action.type === 'cart/addToCart' ||
+    action.type === 'cart/incrementQuantity' ||
+    action.type === 'cart/decrementQuantity' ||
+    action.type === 'cart/removeFromCart'
+  ) {
+    const cartState = store.getState().cart // Get the current cart state
+
+    // Store the cart items in local storage
+    localStorage.setItem('cart', JSON.stringify(cartState.items))
+  }
+
+  return result
+}
+
+const cartItems = localStorage.getItem('cart');
+const parsedCartItems = cartItems ? JSON.parse(cartItems) : [];
+
+
 const initialState = {
-  items: [] as CartItem[],
+  items: parsedCartItems as CartItem[],
 }
 
 export const cartSlice = createSlice({

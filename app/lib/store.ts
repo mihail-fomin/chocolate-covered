@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { categorySlice } from './feature/category/categorySlice'
-import { cartSlice } from './feature/cart/cartSlice'
+import { cartMiddleware, cartSlice } from './feature/cart/cartSlice'
 
 export const makeStore = () => {
   return configureStore({
@@ -8,6 +8,7 @@ export const makeStore = () => {
       category: categorySlice.reducer,
       cart: cartSlice.reducer,
     },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cartMiddleware)
   })
 }
 
