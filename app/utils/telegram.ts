@@ -12,7 +12,7 @@ if (telegramToken) {
 
 // Функция для отправки сообщения в Telegram
 export function sendTelegramMessage(message: string) {
-  const chatId = '-1001759583869'
+  const chatId = '719127303'
 
   bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
 }

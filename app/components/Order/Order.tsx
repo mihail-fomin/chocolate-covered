@@ -2,8 +2,9 @@ import React from 'react'
 import { Button, Dialog, Flex } from '@radix-ui/themes'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import InputFields, { IFormValues } from './InputFields'
-import { useAppSelector } from '@/app/lib/hooks'
+import { useAppDispatch, useAppSelector } from '@/app/lib/hooks'
 import axios from 'axios'
+import { clearCart } from '@/app/lib/feature/cart/cartSlice'
 
 interface Props {
   setOpenCart: React.Dispatch<React.SetStateAction<boolean>>
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const Order = ({ setOpenCart, disabled }: Props) => {
+  const dispatch = useAppDispatch()
+
   const {
     register,
     handleSubmit,
@@ -23,12 +26,12 @@ const Order = ({ setOpenCart, disabled }: Props) => {
   const onSubmit: SubmitHandler<IFormValues> = async (data) => {
     // setLoading(true)
     try {
-      const response = await axios.post('/api/message', {
+      await axios.post('/api/message', {
         productArray,
         orderData: data,
       })
-      console.log(response.data)
       setOpenCart(false)
+      dispatch(clearCart())
     } catch (error) {
       console.error(error)
     } finally {

@@ -13,7 +13,7 @@ export const cartMiddleware: Middleware = (store) => (next) => (action: any) => 
     action.type === 'cart/addToCart' ||
     action.type === 'cart/incrementQuantity' ||
     action.type === 'cart/decrementQuantity' ||
-    action.type === 'cart/removeFromCart'
+    action.type === 'cart/clearCart'
   ) {
     const cartState = store.getState().cart // Get the current cart state
 
@@ -63,13 +63,9 @@ export const cartSlice = createSlice({
         }
       }
     },
-    removeFromCart: (state, action) => {
-      const { id } = action.payload
-      const itemIndex = state.items.findIndex((item) => item.id === id)
-      if (itemIndex !== -1) {
-        state.items.splice(itemIndex, 1)
-      }
-    },
+    clearCart: (state) => {
+        state.items = []
+    }
   },
 })
 
@@ -77,5 +73,5 @@ export const {
   addToCart,
   incrementQuantity,
   decrementQuantity,
-  removeFromCart,
+  clearCart,
 } = cartSlice.actions
