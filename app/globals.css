@@ -29,9 +29,8 @@
 }
 
 .general-btn disabled {
-  @apply  bg-slate-200;
+  @apply bg-slate-200;
 }
-
 
 .gray-btn {
   @apply bg-slate-100 hover:bg-slate-200;

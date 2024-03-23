@@ -5,28 +5,28 @@ export interface CartItem extends Product {
   quantity: number
 }
 
+export const cartMiddleware: Middleware =
+  (store) => (next) => (action: any) => {
+    const result = next(action) // Call next middleware or reducer first
 
-export const cartMiddleware: Middleware = (store) => (next) => (action: any) => {
-  const result = next(action) // Call next middleware or reducer first
+    if (
+      action.type === 'cart/addToCart' ||
+      action.type === 'cart/incrementQuantity' ||
+      action.type === 'cart/decrementQuantity' ||
+      action.type === 'cart/clearCart'
+    ) {
+      const cartState = store.getState().cart // Get the current cart state
 
-  if (
-    action.type === 'cart/addToCart' ||
-    action.type === 'cart/incrementQuantity' ||
-    action.type === 'cart/decrementQuantity' ||
-    action.type === 'cart/clearCart'
-  ) {
-    const cartState = store.getState().cart // Get the current cart state
+      // Store the cart items in local storage
+      localStorage.setItem('cart', JSON.stringify(cartState.items))
+    }
 
-    // Store the cart items in local storage
-    localStorage.setItem('cart', JSON.stringify(cartState.items))
+    return result
   }
 
-  return result
-}
-
-const cartItems = typeof window !== 'undefined' ? localStorage.getItem('cart') : null;
-const parsedCartItems: CartItem[] = cartItems ? JSON.parse(cartItems) : [];
-
+const cartItems =
+  typeof window !== 'undefined' ? localStorage.getItem('cart') : null
+const parsedCartItems: CartItem[] = cartItems ? JSON.parse(cartItems) : []
 
 const initialState = {
   items: parsedCartItems as CartItem[],
@@ -64,14 +64,10 @@ export const cartSlice = createSlice({
       }
     },
     clearCart: (state) => {
-        state.items = []
-    }
+      state.items = []
+    },
   },
 })
 
-export const {
-  addToCart,
-  incrementQuantity,
-  decrementQuantity,
-  clearCart,
-} = cartSlice.actions
+export const { addToCart, incrementQuantity, decrementQuantity, clearCart } =
+  cartSlice.actions

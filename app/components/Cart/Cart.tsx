@@ -5,14 +5,17 @@ import { Avatar, Box, Button, Card, Dialog, Flex, Text } from '@radix-ui/themes'
 import { useAppDispatch, useAppSelector } from '../../lib/hooks'
 import { getTotalPrice } from '../../utils'
 import Order from '../Order/Order'
-import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
-import { incrementQuantity, decrementQuantity } from '../../lib/feature/cart/cartSlice'
+import { MinusIcon, PlusIcon } from '@radix-ui/react-icons'
+import {
+  incrementQuantity,
+  decrementQuantity,
+} from '../../lib/feature/cart/cartSlice'
 import { Product } from '@prisma/client'
 
 const Cart = () => {
   const products = useAppSelector((state) => state.cart.items)
   const [openCart, setOpenCart] = React.useState(false)
-  
+
   const dispatch = useAppDispatch()
 
   const handleDecrement = (product: Product) => {
@@ -49,14 +52,25 @@ const Cart = () => {
                         <Text as="div" size="2" weight="bold">
                           {product.title}
                         </Text>
-                        <Flex p='2' gap='1' align='center'>
-                          <Box className='p-2 hover:bg-slate-200 rounded' onClick={() => handleDecrement(product)}>
+                        <Flex p="2" gap="1" align="center">
+                          <Box
+                            className="p-2 hover:bg-slate-200 rounded"
+                            onClick={() => handleDecrement(product)}
+                          >
                             <MinusIcon />
                           </Box>
-                          <Text as="div" size="2" color="gray"  className='border-2 rounded py-2 px-4'>
+                          <Text
+                            as="div"
+                            size="2"
+                            color="gray"
+                            className="border-2 rounded py-2 px-4"
+                          >
                             {product.quantity}
                           </Text>
-                          <Box className='p-2 hover:bg-slate-200 rounded'  onClick={() => handleIncrement(product)}>
+                          <Box
+                            className="p-2 hover:bg-slate-200 rounded"
+                            onClick={() => handleIncrement(product)}
+                          >
                             <PlusIcon />
                           </Box>
                         </Flex>
@@ -74,7 +88,7 @@ const Cart = () => {
 
         <Flex gap="3" mt="4" justify="end">
           <Dialog.Close>
-            <Button variant="soft" color="gray" className='gray-btn'>
+            <Button variant="soft" color="gray" className="gray-btn">
               Закрыть
             </Button>
           </Dialog.Close>
