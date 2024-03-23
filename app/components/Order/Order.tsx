@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from '@/app/lib/hooks'
 import axios from 'axios'
 import { clearCart } from '@/app/lib/feature/cart/cartSlice'
 import toast from 'react-hot-toast'
-
 interface Props {
   setOpenCart: React.Dispatch<React.SetStateAction<boolean>>
   disabled: boolean
@@ -21,11 +20,11 @@ const Order = ({ setOpenCart, disabled }: Props) => {
     watch,
     formState: { errors },
   } = useForm<IFormValues>()
-  //   const [loading, setLoading] = React.useState(false)
+    const [loading, setLoading] = React.useState(false)
   const productArray = useAppSelector((state) => state.cart.items)
 
   const onSubmit: SubmitHandler<IFormValues> = async (data) => {
-    // setLoading(true)
+    setLoading(true)
     try {
       await axios.post('/api/message', {
         productArray,
@@ -38,7 +37,7 @@ const Order = ({ setOpenCart, disabled }: Props) => {
       toast.error('Произошла ошибка')
       console.error(error)
     } finally {
-      //   setLoading(false)
+      setLoading(false)
     }
   }
 
@@ -55,8 +54,8 @@ const Order = ({ setOpenCart, disabled }: Props) => {
           <InputFields register={register} errors={errors} watch={watch} />
 
           <Flex justify="end">
-            <Button mt="4" type="submit" className="general-btn">
-              Отправить
+            <Button mt="4" disabled={loading} type="submit" className="general-btn">
+              {loading && <span className='loader'></span>} Отправить
             </Button>
           </Flex>
         </form>
