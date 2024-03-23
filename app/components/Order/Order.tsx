@@ -5,6 +5,7 @@ import InputFields, { IFormValues } from './InputFields'
 import { useAppDispatch, useAppSelector } from '@/app/lib/hooks'
 import axios from 'axios'
 import { clearCart } from '@/app/lib/feature/cart/cartSlice'
+import toast from 'react-hot-toast'
 
 interface Props {
   setOpenCart: React.Dispatch<React.SetStateAction<boolean>>
@@ -31,8 +32,10 @@ const Order = ({ setOpenCart, disabled }: Props) => {
         orderData: data,
       })
       setOpenCart(false)
+      toast.success('Заказ успешно отправлен. Ожидайте, мы с вами свяжемся.')
       dispatch(clearCart())
     } catch (error) {
+      toast.error('Произошла ошибка')
       console.error(error)
     } finally {
       //   setLoading(false)
