@@ -26,14 +26,6 @@ export const CreateInputs = (register: UseFormRegister<IFormValues>) => [
     },
   },
   {
-    type: 'text',
-    name: 'address',
-    placeholder: 'Адрес',
-    register: register,
-    required: true,
-    maxLength: 256,
-  },
-  {
     type: 'radio',
     name: 'format',
     register: register,

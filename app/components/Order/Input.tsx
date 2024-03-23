@@ -59,24 +59,35 @@ export const Input = ({
             </Flex>
           </RadioGroup.Root>
           {format === 'delivery' && (
-            <Flex mt="3" gap="3">
+            <div className="mt-2">
               <TextField.Input
-                {...register('entrance')}
-                placeholder="Подъезд"
+                placeholder="Адрес"
+                {...register('address', {
+                  required: true,
+                  maxLength: 256,
+                })}
               />
-              <TextField.Input {...register('floor')} placeholder="Этаж" />
-              <TextField.Input
-                {...register('intercom')}
-                placeholder="Домофон"
-              />
-            </Flex>
+              <Flex mt="3" gap="3">
+                <TextField.Input
+                  {...register('entrance')}
+                  placeholder="Подъезд"
+                />
+                <TextField.Input {...register('floor')} placeholder="Этаж" />
+                <TextField.Input
+                  {...register('intercom')}
+                  placeholder="Домофон"
+                />
+              </Flex>
+            </div>
           )}
         </>
-      ) : (
+      ) : type === 'textarea' ? (
         <TextArea
           placeholder="Комментарии к заказу"
           {...register('comments')}
         ></TextArea>
+      ) : (
+        ''
       )}
       {error && <ErrorMessage type={error.type} message={error.message} />}
     </div>
