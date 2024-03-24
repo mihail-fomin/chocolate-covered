@@ -3,7 +3,7 @@
 import React from 'react'
 import { Avatar, Box, Button, Card, Dialog, Flex, Text } from '@radix-ui/themes'
 import { useAppDispatch, useAppSelector } from '../../lib/hooks'
-import { getTotalPrice } from '../../utils'
+import { getTotalPrice, getTotalQuantity } from '../../utils'
 import Order from '../Order/Order'
 import { MinusIcon, PlusIcon } from '@radix-ui/react-icons'
 import {
@@ -11,12 +11,16 @@ import {
   decrementQuantity,
 } from '../../lib/feature/cart/cartSlice'
 import { Product } from '@prisma/client'
+import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 
 const Cart = () => {
   const products = useAppSelector((state) => state.cart.items)
   const [openCart, setOpenCart] = React.useState(false)
 
   const dispatch = useAppDispatch()
+
+  const totalPrice = getTotalPrice(products)
+  const totalQuantity = getTotalQuantity(products)
 
   const handleDecrement = (product: Product) => {
     dispatch(decrementQuantity(product))
@@ -29,7 +33,16 @@ const Cart = () => {
   return (
     <Dialog.Root open={openCart} onOpenChange={setOpenCart}>
       <Dialog.Trigger>
-        <Button className="general-btn">Корзина</Button>
+        <Button className="general-btn">
+          <ShoppingCartIcon className="h-6" />
+          {products.length ? (
+            <>
+              {totalPrice} ₽ / {totalQuantity} товаров
+            </>
+          ) : (
+            'Пусто'
+          )}
+        </Button>
       </Dialog.Trigger>
 
       <Dialog.Content>

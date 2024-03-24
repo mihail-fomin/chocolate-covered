@@ -14,3 +14,7 @@ export const getTotalPrice = (products: CartItem[]) => {
     0,
   )
 }
+
+export const getTotalQuantity = (products: CartItem[]) => {
+  return products.reduce((acc, item) => (acc += item.quantity), 0)
+}
