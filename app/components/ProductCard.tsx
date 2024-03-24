@@ -35,7 +35,7 @@ const ProductCard = ({ product }: Props) => {
         </li>
       </Dialog.Trigger>
       <Dialog.Content>
-        <ModalContent product={product}/>
+        <ModalContent product={product} />
       </Dialog.Content>
     </Dialog.Root>
   )
