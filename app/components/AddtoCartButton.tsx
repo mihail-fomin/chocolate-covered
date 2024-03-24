@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { ReactEventHandler } from 'react'
 import { Button } from '@radix-ui/themes'
 import { useAppDispatch } from '../lib/hooks'
 import { addToCart } from '../lib/feature/cart/cartSlice'
@@ -14,7 +14,8 @@ const AddtoCartButton = ({ product }: Props) => {
   const [hovered, setHovered] = React.useState(false)
   const dispatch = useAppDispatch()
 
-  const handleAddClick = () => {
+  const handleAddClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
     dispatch(addToCart(product))
   }
 
