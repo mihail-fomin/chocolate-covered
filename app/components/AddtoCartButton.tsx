@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ReactEventHandler } from 'react'
+import React from 'react'
 import { Button } from '@radix-ui/themes'
 import { useAppDispatch } from '../lib/hooks'
 import { addToCart } from '../lib/feature/cart/cartSlice'

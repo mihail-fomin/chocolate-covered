@@ -20,7 +20,7 @@ const Order = ({ setOpenCart, disabled }: Props) => {
     watch,
     formState: { errors },
   } = useForm<IFormValues>()
-    const [loading, setLoading] = React.useState(false)
+  const [loading, setLoading] = React.useState(false)
   const productArray = useAppSelector((state) => state.cart.items)
 
   const onSubmit: SubmitHandler<IFormValues> = async (data) => {
@@ -54,8 +54,13 @@ const Order = ({ setOpenCart, disabled }: Props) => {
           <InputFields register={register} errors={errors} watch={watch} />
 
           <Flex justify="end">
-            <Button mt="4" disabled={loading} type="submit" className="general-btn">
-              {loading && <span className='loader'></span>} Отправить
+            <Button
+              mt="4"
+              disabled={loading}
+              type="submit"
+              className="general-btn"
+            >
+              {loading && <span className="loader"></span>} Отправить
             </Button>
           </Flex>
         </form>
