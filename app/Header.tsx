@@ -9,7 +9,7 @@ import Cart from './components/Cart/Cart'
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-red-300 py-2">
+    <header className="fixed top-0 left-0 right-0 z-10 bg-red-300 py-2">
       <Container>
         <nav>
           <Flex justify="between" align="center">

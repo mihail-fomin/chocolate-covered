@@ -16,7 +16,7 @@ const page = async () => {
   return (
     <>
       {/* <Categories /> */}
-      <Flex justify={'center'}>
+      <Flex mt='9' justify={'center'}>
         <ul className="grid grid-cols-2 gap-4 mt-3 md:grid-cols-3 lg:grid-cols-4">
           {categories.map((category) => (
             <li key={category.title}>
