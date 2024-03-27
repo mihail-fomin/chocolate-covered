@@ -29,7 +29,7 @@
 }
 
 .general-btn:disabled {
-  @apply bg-red-400 text-slate-600;
+  @apply bg-red-200 text-slate-600;
 }
 
 .gray-btn {
