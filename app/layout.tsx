@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className='relative'>
+      <body className="relative">
         <Theme accentColor="ruby">
           <StoreProvider>
             <NextTopLoader color="#991C30" />
