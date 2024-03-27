@@ -1,5 +1,5 @@
 import Categories from '@/app/Categories'
-import ProductCard from '@/app/components/ProductCard'
+import { ProductCard } from '@/app/components/ProductCard'
 import prisma from '@/app/utils/connect'
 import { Flex } from '@radix-ui/themes'
 import React from 'react'

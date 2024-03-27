@@ -7,7 +7,7 @@ import '@radix-ui/themes/styles.css'
 import Container from './components/Container'
 import StoreProvider from './StoreProvider'
 import { Toaster } from 'react-hot-toast'
-import NextTopLoader from 'nextjs-toploader';
+import NextTopLoader from 'nextjs-toploader'
 
 export const metadata: Metadata = {
   title: 'Все в шоколаде',
@@ -24,9 +24,7 @@ export default function RootLayout({
       <body>
         <Theme accentColor="ruby">
           <StoreProvider>
-            <NextTopLoader
-              color='#991C30'
-            />
+            <NextTopLoader color="#991C30" />
             <Toaster />
             <Header />
             <Container>
