@@ -31,6 +31,8 @@ async function sendTelegramMessage(message: string) {
     if (!response.ok) {
       throw new Error(`Ошибка ${response.statusText}`)
     }
+    console.log('response: ', response);
+
 //   bot.sendMessage(chatId, message, { parse_mode: 'HTML' }).catch((error) => {
 //     console.log(error.code);  // => 'ETELEGRAM'
 //     console.log(error.response.body); // => { ok: false, error_code: 400, description: 'Bad Request: chat not found' }
