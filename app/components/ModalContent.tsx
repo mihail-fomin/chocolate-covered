@@ -7,11 +7,11 @@ import { Heading, Text } from '@radix-ui/themes'
 const ModalContent = ({ product }: { product: Product }) => {
   return (
     <li className="flex flex-col h-full">
-      <div className="h-64 mx-auto">
+      <div className="mx-auto">
         <Image
-          className="rounded-lg h-64 object-cover"
-          width={256}
-          height={256}
+          className="rounded-lg h-64 object-cover md:h-96 w-full overflow-hidden"
+          width={500}
+          height={500}
           src={product.imageUrl}
           alt="Картинка десерта"
         />
