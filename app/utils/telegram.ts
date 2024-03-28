@@ -3,25 +3,39 @@ import { CartItem } from '../lib/feature/cart/cartSlice'
 import { IFormValues } from '../components/Order/InputFields'
 
 const telegramToken = process.env.TG_TOKEN
+const BASE_URI = 'https://api.telegram.org'
 
-let bot: TelegramBot
+// let bot: TelegramBot
 
-if (telegramToken) {
-  bot = new TelegramBot(telegramToken, { polling: true })
-}
+// if (telegramToken) {
+//   bot = new TelegramBot(telegramToken, { polling: true })
+// }
 
 // Функция для отправки сообщения в Telegram
-export function sendTelegramMessage(message: string) {
-  console.log('message: ', message)
-
-  const chatId = '-1001759583869'
+async function sendTelegramMessage(message: string) {
+  const chat_id = '-1001759583869'
 //   const chatId = '719127303'
 
-  bot.sendMessage(chatId, message, { parse_mode: 'HTML' }).catch((error) => {
-    console.log(error.code);  // => 'ETELEGRAM'
-    console.log(error.response.body); // => { ok: false, error_code: 400, description: 'Bad Request: chat not found' }
+  const response = await fetch(`${BASE_URI}/bot${telegramToken}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          chat_id,
+          text: message,
+          parse_mode: "html",
+        })
+      }
+    )
+    if (!response.ok) {
+      throw new Error(`Ошибка ${response.statusText}`)
+    }
+//   bot.sendMessage(chatId, message, { parse_mode: 'HTML' }).catch((error) => {
+//     console.log(error.code);  // => 'ETELEGRAM'
+//     console.log(error.response.body); // => { ok: false, error_code: 400, description: 'Bad Request: chat not found' }
 
-  })
+//   })
 }
 
 // Функция для обработки массива объектов и отправки сообщений
