@@ -1,4 +1,4 @@
-// import TelegramBot from 'node-telegram-bot-api'
+import TelegramBot from 'node-telegram-bot-api'
 import { CartItem } from '../lib/feature/cart/cartSlice'
 import { IFormValues } from '../components/Order/InputFields'
 
@@ -14,8 +14,8 @@ if (telegramToken) {
 export function sendTelegramMessage(message: string) {
   console.log('message: ', message)
 
-  const chatId = '-1001759583869'
-//   const chatId = '719127303'
+//   const chatId = '-1001759583869'
+  const chatId = '719127303'
 
   bot.sendMessage(chatId, message, { parse_mode: 'HTML' }).catch((error) => {
     console.log(error.code);  // => 'ETELEGRAM'
