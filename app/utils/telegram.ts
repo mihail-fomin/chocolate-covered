@@ -2,13 +2,10 @@ import TelegramBot from 'node-telegram-bot-api'
 import { CartItem } from '../lib/feature/cart/cartSlice'
 import { IFormValues } from '../components/Order/InputFields'
 
-const telegramToken = process.env.TG_TOKEN
+const telegramToken: any = process.env.TG_TOKEN
 
-let bot: TelegramBot
+const bot = new TelegramBot(telegramToken, { polling: true })
 
-if (telegramToken) {
-  bot = new TelegramBot(telegramToken, { polling: true })
-}
 
 // Функция для отправки сообщения в Telegram
 export function sendTelegramMessage(message: string) {
