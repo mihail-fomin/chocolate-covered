@@ -12,10 +12,16 @@ if (telegramToken) {
 
 // Функция для отправки сообщения в Telegram
 export function sendTelegramMessage(message: string) {
+  console.log('message: ', message)
+
   const chatId = '-1001759583869'
 //   const chatId = '719127303'
 
-  bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
+  bot.sendMessage(chatId, message, { parse_mode: 'HTML' }).catch((error) => {
+    console.log(error.code);  // => 'ETELEGRAM'
+    console.log(error.response.body); // => { ok: false, error_code: 400, description: 'Bad Request: chat not found' }
+
+  })
 }
 
 // Функция для обработки массива объектов и отправки сообщений
