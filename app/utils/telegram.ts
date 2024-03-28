@@ -71,6 +71,6 @@ export const sendOrder = async (
 
     sendTelegramMessage(message)
   } catch (error) {
-    console.error(error)
+    console.error('Error while sending order',error)
   }
 }
