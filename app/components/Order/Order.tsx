@@ -51,7 +51,11 @@ const Order = ({ setOpenCart, disabled }: Props) => {
       <Dialog.Content>
         <Dialog.Title>Заказ</Dialog.Title>
         <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
-          <InputFields register={register} errors={errors} watch={watch} />
+          <InputFields
+            register={register}
+            errors={errors}
+            watch={watch}
+          />
 
           <Flex justify="end">
             <Button

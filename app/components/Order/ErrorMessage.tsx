@@ -1,16 +1,11 @@
 import React from 'react'
 
-interface Props {
-  type: string
-  message: string
-}
-
-const ErrorMessage = ({ type, message }: Props) => {
+const ErrorMessage = ({ type, message }: any) => {
   return (
     <span className="text-red-500">
       {type === 'required' && 'Заполните данное поле'}
       {type === 'pattern' && message}
-      {type === 'maxLength' && `Максимальная длина - ${message} символа`}
+      {type === 'maxLength' && 'Превышена максимальная длина'}
     </span>
   )
 }

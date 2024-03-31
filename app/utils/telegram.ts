@@ -6,19 +6,17 @@ const telegramToken: any = process.env.TG_TOKEN
 
 const bot = new TelegramBot(telegramToken, { polling: true })
 
-
 // Функция для отправки сообщения в Telegram
 export function sendTelegramMessage(message: string) {
-  console.log('message: ', message)
+  const chatId = '-1001759583869'
+  // const chatId = '719127303'
 
-//   const chatId = '-1001759583869'
-  const chatId = '719127303'
-
-  bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
+  bot
+    .sendMessage(chatId, message, { parse_mode: 'HTML' })
     .then((response) => console.log(response))
     .catch((error) => {
-        console.log(error.code);  // => 'ETELEGRAM'
-        console.log(error.response.body); // => { ok: false, error_code: 400, description: 'Bad Request: chat not found' }
+      console.log(error.code) // => 'ETELEGRAM'
+      console.log(error.response.body) // => { ok: false, error_code: 400, description: 'Bad Request: chat not found' }
     })
 }
 
@@ -46,21 +44,33 @@ export const sendOrder = async (
       <b>Телефон:</b> <i>${phone}</i>
       <b>Способ передачи:</b> ${format === 'delivery' ? `<i>Доставка</i> ` : `<i>Самовывоз</i>`}
       ${
-        format === 'delivery'
-          ? `<b>Адрес:</b> <i>${address}</i>
-          <b>Подъезд:</b> <i>${entrance}</i>
-          <b>Этаж:</b> <i>${floor}</i>
-          <b>Домофон:</b> <i>${intercom}</i>`
-          : ``
-      }
-      ${comments.length > 0 ? `<b> Комментарии к заказу:</b> <i>${comments}</i>` : ``}
+        format === 'delivery' &&
+        `<b>Адрес:</b> <i>${address}</i>
+      `
+      }`
+
+    if (entrance)
+      message += `<b>Подъезд:</b> <i>${entrance}</i>
+      `
+    if (floor)
+      message += `<b>Этаж:</b> <i>${floor}</i>
+      `
+    if (intercom)
+      message += `<b>Домофон:</b> <i>${intercom}</i>
+      `
+
+    if (comments.length) {
+      message += `<b> Комментарии к заказу:</b> <i>${comments}</i>`
+    }
+
+    message += `
       <b> Товары: </>
       `
 
     for (const productItem of productArray) {
       const productAmount = productItem.quantity
       message += `<b>${productItem.title}</> в количестве <b>${productAmount}</>шт., 
-        `
+      `
       totalSum += Number(productItem.price) * Number(productAmount)
       totalCount += Number(productAmount)
     }
@@ -69,6 +79,6 @@ export const sendOrder = async (
 
     sendTelegramMessage(message)
   } catch (error) {
-    console.error('Error while sending order',error)
+    console.error('Error while sending order', error)
   }
 }
