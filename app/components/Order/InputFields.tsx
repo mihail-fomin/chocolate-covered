@@ -3,6 +3,7 @@ import {
   FieldErrors,
   UseFormRegister,
   UseFormWatch,
+  FieldError,
 } from 'react-hook-form'
 import { Flex, RadioGroup, Text, TextArea, TextField } from '@radix-ui/themes'
 import ErrorMessage from './ErrorMessage'
@@ -40,8 +41,11 @@ export interface IFormValues {
   comments: string
 }
 
-const InputFields = ({ register, errors, watch }: Props) => {
-  const format = watch('format')
+const NAME_REGEX = /^[-A-ZА-Я' ]+?$/iu
+const PHONE_REGEX = /^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{7,10}$/
+
+const InputFields = ({ register, errors }: Props) => {
+  const [isDeliveryFormat, setIsDeliveryFormat] = React.useState(true)
 
   return (
     <>
@@ -50,41 +54,49 @@ const InputFields = ({ register, errors, watch }: Props) => {
         {...register('name', {
           required: true,
           pattern: {
-            value: /^[-A-ZА-Я' ]+?$/iu,
+            value: NAME_REGEX,
             message: 'Имя не может содержать цифры или спецсимволы',
           },
           maxLength: 32,
         })}
       />
-      <ErrorMessage type={errors.name?.type} message={errors.name?.message} />
+      <ErrorMessage error={errors.name as FieldError} />
       <TextField.Input
         placeholder={'Телефон'}
         {...register('phone', {
           required: true,
           pattern: {
-            value: /^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{7,10}$/,
+            value: PHONE_REGEX,
             message: 'Введите корректый телефон',
           },
         })}
       />
-      <ErrorMessage type={errors.phone?.type} message={errors.phone?.message} />
+      <ErrorMessage error={errors.phone as FieldError} />
       <RadioGroup.Root defaultValue="delivery" {...register('format')}>
         <Flex gap="2" direction="column">
           <Text as="label" size="2">
             <Flex gap="2">
-              <RadioGroup.Item className="RadioGroupItem" value="delivery" />{' '}
+              <RadioGroup.Item
+                className="RadioGroupItem"
+                value="delivery"
+                onClick={() => setIsDeliveryFormat(true)}
+              />{' '}
               Доставка
             </Flex>
           </Text>
           <Text as="label" size="2">
             <Flex gap="2">
-              <RadioGroup.Item className="RadioGroupItem" value="pickup" />{' '}
+              <RadioGroup.Item
+                className="RadioGroupItem"
+                value="pickup"
+                onClick={() => setIsDeliveryFormat(false)}
+              />{' '}
               Самовывоз
             </Flex>
           </Text>
         </Flex>
       </RadioGroup.Root>
-      {format !== null && (
+      {isDeliveryFormat && (
         <div className="mt-2">
           <TextField.Input
             placeholder="Адрес"
@@ -93,10 +105,7 @@ const InputFields = ({ register, errors, watch }: Props) => {
               maxLength: 256,
             })}
           />
-          <ErrorMessage
-            type={errors.address?.type}
-            message={errors.address?.message}
-          />
+          <ErrorMessage error={errors.address as FieldError} />
           <Flex mt="3" gap="3">
             <TextField.Input {...register('entrance')} placeholder="Подъезд" />
             <TextField.Input {...register('floor')} placeholder="Этаж" />
@@ -104,6 +113,7 @@ const InputFields = ({ register, errors, watch }: Props) => {
           </Flex>
         </div>
       )}
+
       <TextArea
         placeholder="Комментарии к заказу"
         {...register('comments')}

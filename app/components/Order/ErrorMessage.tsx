@@ -1,6 +1,9 @@
 import React from 'react'
+import { FieldError } from 'react-hook-form'
 
-const ErrorMessage = ({ type, message }: any) => {
+const ErrorMessage = ({ error }: { error?: FieldError }) => {
+  const { type, message } = error || {}
+
   return (
     <span className="text-red-500">
       {type === 'required' && 'Заполните данное поле'}
