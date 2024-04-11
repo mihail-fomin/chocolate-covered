@@ -11,7 +11,6 @@ import ErrorMessage from './ErrorMessage'
 type Props = {
   register: UseFormRegister<IFormValues>
   errors: FieldErrors
-  watch: UseFormWatch<IFormValues>
 }
 
 export type InputProps = {
