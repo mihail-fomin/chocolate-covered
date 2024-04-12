@@ -23,10 +23,6 @@ model Order {
   orderedProducts OrderedProduct[]
   customer        Customer         @relation(fields: [customerId], references: [id])
   receiveType     RecieveType
-  address         String?
-  floor           Float?
-  entrance        Float?
-  intercom        String?
   comments        String?
   customerId      String           @db.ObjectId
 }
@@ -37,6 +33,10 @@ model Customer {
   orderId  String
   userName String
   phone    String
+  address  String?
+  floor    Float?
+  entrance Float?
+  intercom String?
 }
 
 model OrderedProduct {
