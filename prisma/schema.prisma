@@ -8,11 +8,47 @@ datasource db {
 }
 
 model Product {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  price       Float
-  weight      Float
-  description String?
-  category    String
-  imageUrl    String
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  price          Float
+  weight         Float
+  description    String?
+  category       String
+  imageUrl       String
+  OrderedProduct OrderedProduct[]
+}
+
+model Order {
+  id              String           @id @default(auto()) @map("_id") @db.ObjectId
+  orderedProducts OrderedProduct[]
+  customer        Customer         @relation(fields: [customerId], references: [id])
+  receiveType     RecieveType
+  address         String?
+  floor           Float?
+  entrance        Float?
+  intercom        String?
+  comments        String?
+  customerId      String           @db.ObjectId
+}
+
+model Customer {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  orders   Order[]
+  orderId  String
+  userName String
+  phone    String
+}
+
+model OrderedProduct {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @db.ObjectId
+  quantity  Int
+  Order     Order?  @relation(fields: [orderId], references: [id])
+  orderId   String? @db.ObjectId
+}
+
+enum RecieveType {
+  PICKUP
+  DELIVERY
 }
