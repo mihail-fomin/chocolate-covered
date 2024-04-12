@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  FieldErrors,
-  UseFormRegister,
-  UseFormWatch,
-  FieldError,
-} from 'react-hook-form'
+import { FieldErrors, UseFormRegister, UseFormWatch, FieldError } from 'react-hook-form'
 import { Flex, RadioGroup, Text, TextArea, TextField } from '@radix-ui/themes'
 import ErrorMessage from './ErrorMessage'
 
@@ -113,10 +108,7 @@ const InputFields = ({ register, errors }: Props) => {
         </div>
       )}
 
-      <TextArea
-        placeholder="Комментарии к заказу"
-        {...register('comments')}
-      ></TextArea>
+      <TextArea placeholder="Комментарии к заказу" {...register('comments')}></TextArea>
     </>
   )
 }

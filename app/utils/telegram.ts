@@ -21,21 +21,9 @@ export function sendTelegramMessage(message: string) {
 }
 
 // Функция для обработки массива объектов и отправки сообщений
-export const sendOrder = async (
-  productArray: CartItem[],
-  orderData: IFormValues,
-) => {
+export const sendOrder = async (productArray: CartItem[], orderData: IFormValues) => {
   try {
-    const {
-      name,
-      phone,
-      address,
-      format,
-      entrance,
-      floor,
-      intercom,
-      comments,
-    } = orderData
+    const { name, phone, address, format, entrance, floor, intercom, comments } = orderData
     let totalSum = 0
     let totalCount = 0
     let message = `

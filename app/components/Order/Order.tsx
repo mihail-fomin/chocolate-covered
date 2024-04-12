@@ -53,12 +53,7 @@ const Order = ({ setOpenCart, disabled }: Props) => {
           <InputFields register={register} errors={errors} />
 
           <Flex justify="end">
-            <Button
-              mt="4"
-              disabled={loading}
-              type="submit"
-              className="general-btn"
-            >
+            <Button mt="4" disabled={loading} type="submit" className="general-btn">
               {loading && <span className="loader"></span>} Отправить
             </Button>
           </Flex>

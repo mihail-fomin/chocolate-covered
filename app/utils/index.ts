@@ -9,10 +9,7 @@ export const getDefaultValue = (currentPath: string) => {
 }
 
 export const getTotalPrice = (products: CartItem[]) => {
-  return products.reduce(
-    (accumulator, item) => accumulator + item.quantity * item.price,
-    0,
-  )
+  return products.reduce((accumulator, item) => accumulator + item.quantity * item.price, 0)
 }
 
 export const getTotalQuantity = (products: CartItem[]) => {

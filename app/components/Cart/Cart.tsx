@@ -40,12 +40,7 @@ const Cart = () => {
                 <Flex direction="column" gap="3">
                   <Card>
                     <Flex gap="3" align="center">
-                      <Avatar
-                        size="5"
-                        src={product.imageUrl}
-                        radius="small"
-                        fallback="T"
-                      />
+                      <Avatar size="5" src={product.imageUrl} radius="small" fallback="T" />
                       <Flex className="w-full" justify="between">
                         <Text as="div" size="2" weight="bold">
                           {product.title}

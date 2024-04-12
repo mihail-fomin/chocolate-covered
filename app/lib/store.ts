@@ -8,8 +8,7 @@ export const makeStore = () => {
       category: categorySlice.reducer,
       cart: cartSlice.reducer,
     },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(cartMiddleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cartMiddleware),
   })
 }
 
