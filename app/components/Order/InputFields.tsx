@@ -33,10 +33,10 @@ export interface IFormValues {
   name: string
   phone: string
   address: string
-  format: string
+  receiveType: string
   entrance: number
   floor: number
-  intercom: string | number
+  intercom: string
   comments: string
 }
 
@@ -71,13 +71,13 @@ const InputFields = ({ register, errors }: Props) => {
         })}
       />
       <ErrorMessage error={errors.phone as FieldError} />
-      <RadioGroup.Root defaultValue="delivery" {...register('format')}>
+      <RadioGroup.Root defaultValue="DELIVERY" {...register('receiveType')}>
         <Flex gap="2" direction="column">
           <Text as="label" size="2">
             <Flex gap="2">
               <RadioGroup.Item
                 className="RadioGroupItem"
-                value="delivery"
+                value="DELIVERY"
                 onClick={() => setIsDeliveryFormat(true)}
               />{' '}
               Доставка
@@ -87,7 +87,7 @@ const InputFields = ({ register, errors }: Props) => {
             <Flex gap="2">
               <RadioGroup.Item
                 className="RadioGroupItem"
-                value="pickup"
+                value="PICKUP"
                 onClick={() => setIsDeliveryFormat(false)}
               />{' '}
               Самовывоз
