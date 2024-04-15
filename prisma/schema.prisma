@@ -25,6 +25,7 @@ model Order {
   receiveType RecieveType
   comments    String?
   customerId  String           @db.ObjectId
+  createdAt   DateTime         @default(now())
 }
 
 model Customer {
