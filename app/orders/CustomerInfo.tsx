@@ -16,7 +16,11 @@ const CustomerInfo = async ({ order }: Props) => {
   return (
     <>
       <Table.Cell>{customer?.userName}</Table.Cell>
-      <Table.Cell>{customer?.phone}</Table.Cell>
+      <Table.Cell>
+        <a href={`tel:${customer?.phone}`} className="text-sky-700">
+          {customer?.phone}
+        </a>
+      </Table.Cell>
       <Table.Cell>{order.receiveType}</Table.Cell>
       <Table.Cell>{customer?.address ? customer.address : '-'}</Table.Cell>
       <Table.Cell>{customer?.floor ? customer.floor : '-'}</Table.Cell>
