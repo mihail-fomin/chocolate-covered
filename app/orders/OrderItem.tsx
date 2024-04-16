@@ -15,8 +15,13 @@ const OrderItem = async ({ productId, quantity }: Props) => {
   })
   return (
     <Flex gap="3">
-      <Text as="p">{product?.title}</Text>
-      <Text as="p">{quantity}</Text>
+      <Text as="p" className="min-w-[20rem]">
+        {product?.title}
+      </Text>
+      <Text as="p" className="w-8">
+        {quantity}
+        {' шт'}
+      </Text>
     </Flex>
   )
 }
