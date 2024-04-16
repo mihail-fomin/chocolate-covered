@@ -8,7 +8,7 @@ const page = async () => {
   const orders = await prisma.order.findMany()
 
   return (
-    <Table.Root>
+    <Table.Root variant="surface">
       <Table.Header>
         <Table.Row>
           {columns.map((column) => (
