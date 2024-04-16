@@ -1,7 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import { Theme } from '@radix-ui/themes'
-import Header from './Header'
 import './globals.css'
 import '@radix-ui/themes/styles.css'
 import Container from './components/Container'
@@ -26,7 +25,6 @@ export default function RootLayout({
           <StoreProvider>
             <NextTopLoader color="#991C30" />
             <Toaster />
-            <Header />
             <Container>
               {children}
               {/* <ThemePanel /> */}

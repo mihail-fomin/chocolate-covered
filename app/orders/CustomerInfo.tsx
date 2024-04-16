@@ -1,7 +1,7 @@
 import { Order } from '@prisma/client'
 import React from 'react'
 import prisma from '../utils/connect'
-import { Flex, Text } from '@radix-ui/themes'
+import { Table } from '@radix-ui/themes'
 
 type Props = {
   order: Order
@@ -14,18 +14,16 @@ const CustomerInfo = async ({ order }: Props) => {
     },
   })
   return (
-    <Flex gap="3">
-      <Text as="p">{customer?.userName}</Text>
-      <Text as="p">{customer?.phone}</Text>
-      <Text as="p">{order.receiveType}</Text>
-      <Text as="p">{customer?.address ? customer.address : '-'}</Text>
-      <Text as="p">{customer?.floor ? customer.floor : '-'}</Text>
-      <Text as="p">{customer?.entrance ? customer.entrance : '-'}</Text>
-      <Text as="p">{customer?.intercom ? customer.intercom : '-'}</Text>
-      <Text as="p" className="max-w-[20rem]">
-        {order?.comments ? order.comments : '-'}
-      </Text>
-    </Flex>
+    <>
+      <Table.Cell>{customer?.userName}</Table.Cell>
+      <Table.Cell>{customer?.phone}</Table.Cell>
+      <Table.Cell>{order.receiveType}</Table.Cell>
+      <Table.Cell>{customer?.address ? customer.address : '-'}</Table.Cell>
+      <Table.Cell>{customer?.floor ? customer.floor : '-'}</Table.Cell>
+      <Table.Cell>{customer?.entrance ? customer.entrance : '-'}</Table.Cell>
+      <Table.Cell>{customer?.intercom ? customer.intercom : '-'}</Table.Cell>
+      <Table.Cell className="max-w-[20rem]">{order?.comments ? order.comments : '-'}</Table.Cell>
+    </>
   )
 }
 

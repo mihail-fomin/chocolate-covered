@@ -3,6 +3,7 @@ import React from 'react'
 import categories from '@/public/category.json'
 import Link from 'next/link'
 import CategoryCard from './components/CategoryCard'
+import Header from './Header'
 
 export interface Category {
   title: string
@@ -16,6 +17,7 @@ const page = async () => {
   return (
     <>
       {/* <Categories /> */}
+      <Header />
       <Flex mt="9" justify={'center'}>
         <ul className="grid grid-cols-2 gap-4 mt-3 md:grid-cols-3 lg:grid-cols-4">
           {categories.map((category) => (

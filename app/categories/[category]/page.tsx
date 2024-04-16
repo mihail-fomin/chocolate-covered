@@ -1,8 +1,10 @@
+import React from 'react'
+import prisma from '@/app/utils/connect'
 import Categories from '@/app/Categories'
 import { ProductCard } from '@/app/components/ProductCard'
-import prisma from '@/app/utils/connect'
 import { Flex } from '@radix-ui/themes'
-import React from 'react'
+import Header from '@/app/Header'
+
 interface Props {
   params: { category: string }
 }
@@ -12,6 +14,7 @@ const page = async ({ params: { category } }: Props) => {
 
   return (
     <>
+      <Header />
       <Categories />
       <Flex justify={'center'}>
         <ul className="grid grid-cols-2 gap-4 mt-3 md:grid-cols-3 lg:grid-cols-4">
