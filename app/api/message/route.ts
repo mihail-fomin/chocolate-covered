@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     })
     console.log('newOrder: ', newOrder)
 
-    await sendOrder(productArray, orderData)
+    await sendOrder(productArray)
     return NextResponse.json({ success: 'Message sent' })
   } catch (error) {
     console.error(error)

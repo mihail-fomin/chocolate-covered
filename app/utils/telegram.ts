@@ -1,6 +1,5 @@
 import TelegramBot from 'node-telegram-bot-api'
 import { CartItem } from '../lib/feature/cart/cartSlice'
-import { IFormValues } from '../components/Order/InputFields'
 
 const telegramToken: any = process.env.TG_TOKEN
 
@@ -21,49 +20,23 @@ export function sendTelegramMessage(message: string) {
 }
 
 // Функция для обработки массива объектов и отправки сообщений
-export const sendOrder = async (productArray: CartItem[], orderData: IFormValues) => {
+export const sendOrder = async (productArray: CartItem[]) => {
   try {
-    const { name, phone, address, format, entrance, floor, intercom, comments } = orderData
     let totalSum = 0
     let totalCount = 0
-    let message = `
-      <strong>Заявка с сайта</strong>
-      <b>Отправитель:</b> <i>${name}</i>
-      <b>Телефон:</b> <i>${phone}</i>
-      <b>Способ передачи:</b> ${format === 'delivery' ? `<i>Доставка</i> ` : `<i>Самовывоз</i>`}
-      ${
-        format === 'delivery' &&
-        `<b>Адрес:</b> <i>${address}</i>
-      `
-      }`
-
-    if (entrance)
-      message += `<b>Подъезд:</b> <i>${entrance}</i>
-      `
-    if (floor)
-      message += `<b>Этаж:</b> <i>${floor}</i>
-      `
-    if (intercom)
-      message += `<b>Домофон:</b> <i>${intercom}</i>
-      `
-
-    if (comments.length) {
-      message += `<b> Комментарии к заказу:</b> <i>${comments}</i>`
-    }
-
-    message += `
-      <b> Товары: </>
-      `
 
     for (const productItem of productArray) {
       const productAmount = productItem.quantity
-      message += `<b>${productItem.title}</> в количестве <b>${productAmount}</>шт., 
-      `
+
       totalSum += Number(productItem.price) * Number(productAmount)
       totalCount += Number(productAmount)
     }
 
-    message += `<b> Итого: </> ${totalCount} товаров на сумму <b>${totalSum}</>руб.`
+    const message = `
+    <strong>Заявка с сайта</strong>
+    ${totalCount} товаров на сумму <b>${totalSum}</>руб.
+    Посмотреть заявку на сайте: https://marygreatcookie.ru/orders
+    `
 
     sendTelegramMessage(message)
   } catch (error) {
