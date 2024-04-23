@@ -16,10 +16,8 @@ type FormValues = {
   password: string
 }
 
-
-
 const Login = (props: Props) => {
-  console.log('props: ', props);
+  console.log('props: ', props)
   const {
     register,
     handleSubmit,
@@ -46,19 +44,21 @@ const Login = (props: Props) => {
       <Text as="p" className="mt-3">
         Login Form
       </Text>
-      {!!props.error && <Text className='bg-red-100 text-red-600 text-center p-2' as="p">Auth Failed</Text>}
+      {!!props.error && (
+        <Text className="bg-red-100 text-red-600 text-center p-2" as="p">
+          Auth Failed
+        </Text>
+      )}
       <form className="mt-3" onSubmit={handleSubmit(onSubmit)}>
         <Flex direction="column" gap="3">
           <TextField.Input placeholder="username" {...register('username')} />
           <TextField.Input placeholder="password" {...register('password')} />
-          <Flex gap='3' justify='end'>
+          <Flex gap="3" justify="end">
             <Link href="/">
-                <Button variant="soft">
-                    Cancel
-                </Button>
+              <Button variant="soft">Cancel</Button>
             </Link>
-            <Button variant="classic" className='text-red-700' type="submit">
-                Submit
+            <Button variant="classic" className="text-red-700" type="submit">
+              Submit
             </Button>
           </Flex>
         </Flex>

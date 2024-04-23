@@ -13,12 +13,12 @@ export const login: LogInFn = async (userName, password) => {
   })
 
   if (!user) {
-      throw new Error('User not found')
-    }
-    console.log('user: ', user);
+    throw new Error('User not found')
+  }
+  console.log('user: ', user)
 
-    if (user && (await compare(password, user.password))) {
-        user.password = ''
-        return user
-    } else throw new Error('Password is incorrect')
+  if (user && (await compare(password, user.password))) {
+    user.password = ''
+    return user
+  } else throw new Error('Password is incorrect')
 }
