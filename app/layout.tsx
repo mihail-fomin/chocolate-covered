@@ -7,6 +7,7 @@ import Container from './components/Container'
 import StoreProvider from './StoreProvider'
 import { Toaster } from 'react-hot-toast'
 import NextTopLoader from 'nextjs-toploader'
+import AuthProvider from './auth/Provider'
 
 export const metadata: Metadata = {
   title: 'Все в шоколаде',
@@ -21,16 +22,18 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className="relative">
-        <Theme accentColor="ruby">
-          <StoreProvider>
-            <NextTopLoader color="#991C30" />
-            <Toaster />
-            <Container>
-              {children}
-              {/* <ThemePanel /> */}
-            </Container>
-          </StoreProvider>
-        </Theme>
+        <AuthProvider>
+          <Theme accentColor="ruby">
+            <StoreProvider>
+              <NextTopLoader color="#991C30" />
+              <Toaster />
+              <Container>
+                {children}
+                {/* <ThemePanel /> */}
+              </Container>
+            </StoreProvider>
+          </Theme>
+        </AuthProvider>
       </body>
     </html>
   )
