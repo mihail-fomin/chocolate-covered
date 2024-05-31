@@ -11,13 +11,13 @@ const SignInButton = () => {
     return (
       <Flex gap="4">
         <Text as="p">{session.user.name}</Text>
-        <Button variant="outline" onClick={() => signOut()}>
-          Sign Out
+        <Button variant="classic" onClick={() => signOut()}>
+          Выйти
         </Button>
       </Flex>
     )
   }
-  return <Button onClick={() => signIn()}>Sign In</Button>
+  return <Button onClick={() => signIn()}>Войти</Button>
 }
 
 export default SignInButton

@@ -1,45 +1,24 @@
 import React from 'react'
-import prisma from '../utils/connect'
-import OrderInfo from './OrderInfo'
-import CustomerInfo from './CustomerInfo'
-import { Table, TableColumnHeaderCell } from '@radix-ui/themes'
+import { Text } from '@radix-ui/themes'
+import { auth } from '@/auth'
+import OrdersNavigation from './OrdersNavigation'
+import OrderTable from './OrderTable'
 
 const page = async () => {
-  const orders = await prisma.order.findMany()
+  const session = await auth()
 
   return (
-    <Table.Root variant="surface">
-      <Table.Header>
-        <Table.Row>
-          {columns.map((column) => (
-            <TableColumnHeaderCell key={column.label}>{column.label}</TableColumnHeaderCell>
-          ))}
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        {orders.map((order) => (
-          <Table.Row key={order.id}>
-            <CustomerInfo order={order} />
-            <OrderInfo order={order} />
-          </Table.Row>
-        ))}
-      </Table.Body>
-    </Table.Root>
+    <div className="h-screen">
+      <OrdersNavigation />
+      {session ? (
+        <OrderTable />
+      ) : (
+        <Text as="p" weight="bold" size="5" align="center" mt="6">
+          Необходимо залогиниться
+        </Text>
+      )}
+    </div>
   )
 }
-
-const columns: { label: string; value: string; className?: string }[] = [
-  { label: 'Имя', value: '' },
-  { label: 'Телефон', value: '' },
-  { label: 'Способ получения', value: '' },
-  { label: 'Адрес', value: '' },
-  { label: 'Этаж', value: '' },
-  { label: 'Домофон', value: '' },
-  { label: 'Подъезд', value: '' },
-  { label: 'Комментарий', value: '' },
-  { label: 'Дата заказа', value: '' },
-  { label: 'Товары', value: '' },
-  // { label: 'Количество', value: '',},
-]
 
 export default page
