@@ -1,19 +1,26 @@
 'use client'
 
 import React from 'react'
+import { useSession } from 'next-auth/react'
+
 import { Avatar, Button, Card, Dialog, Flex, Text } from '@radix-ui/themes'
 import { useAppSelector } from '../../lib/hooks'
+import Skeleton from '../Skeleton'
 import { getTotalPrice, getTotalQuantity } from '../../utils'
 import Order from '../Order/Order'
 import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 import EditQuantity from './EditQuantity'
 
 const Cart = () => {
+    const { status } = useSession()
+
   const products = useAppSelector((state) => state.cart.items)
   const [openCart, setOpenCart] = React.useState(false)
 
   const totalPrice = getTotalPrice(products)
   const totalQuantity = getTotalQuantity(products)
+
+  if (status === 'loading') return <Skeleton height='2rem' width="5rem" />
 
   return (
     <Dialog.Root open={openCart} onOpenChange={setOpenCart}>
