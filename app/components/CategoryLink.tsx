@@ -8,33 +8,33 @@ import { useAppDispatch } from '../lib/hooks'
 import { setActiveCategory } from '../lib/feature/category/categorySlice'
 
 interface Props {
-  category: {
-    title: string
-    rus: string
-    image: string
-  }
+    category: {
+        title: string
+        rus: string
+        image: string
+    }
 }
 
 const CategoryLink = ({ category }: Props) => {
-  const currentPath = usePathname()
-  const dispatch = useAppDispatch()
-  const href = `/categories/${category.title}`
+    const currentPath = usePathname()
+    const dispatch = useAppDispatch()
+    const href = `/categories/${category.title}`
 
-  const handleCategoryClick = () => {
-    dispatch(setActiveCategory({ categoryName: category.title }))
-  }
+    const handleCategoryClick = () => {
+        dispatch(setActiveCategory({ categoryName: category.title }))
+    }
 
-  return (
-    <li key={category.title} className="whitespace-nowrap">
-      <Button
-        variant={href === currentPath ? 'solid' : 'outline'}
-        radius="full"
-        onClick={handleCategoryClick}
-      >
-        <Link href={href}>{category.rus}</Link>
-      </Button>
-    </li>
-  )
+    return (
+        <li key={category.title} className="whitespace-nowrap">
+            <Button
+                variant={href === currentPath ? 'solid' : 'outline'}
+                radius="full"
+                onClick={handleCategoryClick}
+            >
+                <Link href={href}>{category.rus}</Link>
+            </Button>
+        </li>
+    )
 }
 
 export default CategoryLink

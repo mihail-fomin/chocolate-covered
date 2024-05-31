@@ -3,13 +3,13 @@ import { categorySlice } from './feature/category/categorySlice'
 import { cartMiddleware, cartSlice } from './feature/cart/cartSlice'
 
 export const makeStore = () => {
-  return configureStore({
-    reducer: {
-      category: categorySlice.reducer,
-      cart: cartSlice.reducer,
-    },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cartMiddleware),
-  })
+    return configureStore({
+        reducer: {
+            category: categorySlice.reducer,
+            cart: cartSlice.reducer,
+        },
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cartMiddleware),
+    })
 }
 
 // Infer the type of makeStore

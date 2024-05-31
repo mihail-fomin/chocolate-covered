@@ -14,70 +14,75 @@ import EditQuantity from './EditQuantity'
 const Cart = () => {
     const { status } = useSession()
 
-  const products = useAppSelector((state) => state.cart.items)
-  const [openCart, setOpenCart] = React.useState(false)
+    const products = useAppSelector((state) => state.cart.items)
+    const [openCart, setOpenCart] = React.useState(false)
 
-  const totalPrice = getTotalPrice(products)
-  const totalQuantity = getTotalQuantity(products)
+    const totalPrice = getTotalPrice(products)
+    const totalQuantity = getTotalQuantity(products)
 
-  if (status === 'loading') return <Skeleton height='2rem' width="5rem" />
+    if (status === 'loading') return <Skeleton height="2rem" width="5rem" />
 
-  return (
-    <Dialog.Root open={openCart} onOpenChange={setOpenCart}>
-      <Dialog.Trigger>
-        <Button className="general-btn">
-          <ShoppingCartIcon className="h-6" />
-          {products.length ? (
-            <>
-              {totalPrice} ₽ / {totalQuantity} товаров
-            </>
-          ) : (
-            'Пусто'
-          )}
-        </Button>
-      </Dialog.Trigger>
+    return (
+        <Dialog.Root open={openCart} onOpenChange={setOpenCart}>
+            <Dialog.Trigger>
+                <Button className="general-btn">
+                    <ShoppingCartIcon className="h-6" />
+                    {products.length ? (
+                        <>
+                            {totalPrice} ₽ / {totalQuantity} товаров
+                        </>
+                    ) : (
+                        'Пусто'
+                    )}
+                </Button>
+            </Dialog.Trigger>
 
-      <Dialog.Content>
-        <Dialog.Title>Корзина</Dialog.Title>
+            <Dialog.Content>
+                <Dialog.Title>Корзина</Dialog.Title>
 
-        <Flex direction="column" gap="3">
-          <ul className="flex flex-col gap-3">
-            {products.map((product) => (
-              <li key={product.id}>
                 <Flex direction="column" gap="3">
-                  <Card>
-                    <Flex gap="3" align="center">
-                      <Avatar size="5" src={product.imageUrl} radius="small" fallback="T" />
-                      <Flex className="w-full" justify="between">
-                        <Text as="div" size="2" weight="bold">
-                          {product.title}
+                    <ul className="flex flex-col gap-3">
+                        {products.map((product) => (
+                            <li key={product.id}>
+                                <Flex direction="column" gap="3">
+                                    <Card>
+                                        <Flex gap="3" align="center">
+                                            <Avatar
+                                                size="5"
+                                                src={product.imageUrl}
+                                                radius="small"
+                                                fallback="T"
+                                            />
+                                            <Flex className="w-full" justify="between">
+                                                <Text as="div" size="2" weight="bold">
+                                                    {product.title}
+                                                </Text>
+
+                                                <EditQuantity product={product} />
+                                            </Flex>
+                                        </Flex>
+                                    </Card>
+                                </Flex>
+                            </li>
+                        ))}
+                        <Text>
+                            Итого: <span>{getTotalPrice(products)}</span> ₽
                         </Text>
-
-                        <EditQuantity product={product} />
-                      </Flex>
-                    </Flex>
-                  </Card>
+                    </ul>
                 </Flex>
-              </li>
-            ))}
-            <Text>
-              Итого: <span>{getTotalPrice(products)}</span> ₽
-            </Text>
-          </ul>
-        </Flex>
 
-        <Flex gap="3" mt="4" justify="end">
-          <Dialog.Close>
-            <Button variant="soft" color="gray" className="gray-btn">
-              Закрыть
-            </Button>
-          </Dialog.Close>
+                <Flex gap="3" mt="4" justify="end">
+                    <Dialog.Close>
+                        <Button variant="soft" color="gray" className="gray-btn">
+                            Закрыть
+                        </Button>
+                    </Dialog.Close>
 
-          <Order disabled={products.length === 0} setOpenCart={setOpenCart} />
-        </Flex>
-      </Dialog.Content>
-    </Dialog.Root>
-  )
+                    <Order disabled={products.length === 0} setOpenCart={setOpenCart} />
+                </Flex>
+            </Dialog.Content>
+        </Dialog.Root>
+    )
 }
 
 export default Cart

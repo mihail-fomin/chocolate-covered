@@ -7,60 +7,60 @@ import axios from 'axios'
 import { clearCart } from '@/app/lib/feature/cart/cartSlice'
 import toast from 'react-hot-toast'
 interface Props {
-  setOpenCart: React.Dispatch<React.SetStateAction<boolean>>
-  disabled: boolean
+    setOpenCart: React.Dispatch<React.SetStateAction<boolean>>
+    disabled: boolean
 }
 
 const Order = ({ setOpenCart, disabled }: Props) => {
-  const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormValues>()
-  const [loading, setLoading] = React.useState(false)
-  const productArray = useAppSelector((state) => state.cart.items)
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<IFormValues>()
+    const [loading, setLoading] = React.useState(false)
+    const productArray = useAppSelector((state) => state.cart.items)
 
-  const onSubmit: SubmitHandler<IFormValues> = async (data) => {
-    setLoading(true)
-    try {
-      await axios.post('/api/message', {
-        productArray,
-        orderData: data,
-      })
-      setOpenCart(false)
-      toast.success('Заказ успешно отправлен. Ожидайте, мы с вами свяжемся.')
-      dispatch(clearCart())
-    } catch (error) {
-      toast.error('Произошла ошибка')
-      console.error(error)
-    } finally {
-      setLoading(false)
+    const onSubmit: SubmitHandler<IFormValues> = async (data) => {
+        setLoading(true)
+        try {
+            await axios.post('/api/message', {
+                productArray,
+                orderData: data,
+            })
+            setOpenCart(false)
+            toast.success('Заказ успешно отправлен. Ожидайте, мы с вами свяжемся.')
+            dispatch(clearCart())
+        } catch (error) {
+            toast.error('Произошла ошибка')
+            console.error(error)
+        } finally {
+            setLoading(false)
+        }
     }
-  }
 
-  return (
-    <Dialog.Root>
-      <Dialog.Trigger>
-        <Button className="general-btn" disabled={disabled}>
-          Заказать
-        </Button>
-      </Dialog.Trigger>
-      <Dialog.Content>
-        <Dialog.Title>Заказ</Dialog.Title>
-        <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
-          <InputFields register={register} errors={errors} />
+    return (
+        <Dialog.Root>
+            <Dialog.Trigger>
+                <Button className="general-btn" disabled={disabled}>
+                    Заказать
+                </Button>
+            </Dialog.Trigger>
+            <Dialog.Content>
+                <Dialog.Title>Заказ</Dialog.Title>
+                <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
+                    <InputFields register={register} errors={errors} />
 
-          <Flex justify="end">
-            <Button mt="4" disabled={loading} type="submit" className="general-btn">
-              {loading && <span className="loader"></span>} Отправить
-            </Button>
-          </Flex>
-        </form>
-      </Dialog.Content>
-    </Dialog.Root>
-  )
+                    <Flex justify="end">
+                        <Button mt="4" disabled={loading} type="submit" className="general-btn">
+                            {loading && <span className="loader"></span>} Отправить
+                        </Button>
+                    </Flex>
+                </form>
+            </Dialog.Content>
+        </Dialog.Root>
+    )
 }
 
 export default Order

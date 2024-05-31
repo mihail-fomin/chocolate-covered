@@ -6,31 +6,31 @@ import CategoryCard from './components/CategoryCard'
 import Header from './Header'
 
 export interface Category {
-  title: string
-  rus: string
-  image: string
+    title: string
+    rus: string
+    image: string
 }
 
 const page = async () => {
-  const createHref = (category: Category) => `/categories/${category.title}`
+    const createHref = (category: Category) => `/categories/${category.title}`
 
-  return (
-    <>
-      {/* <Categories /> */}
-      <Header />
-      <Flex mt="9" justify={'center'}>
-        <ul className="grid grid-cols-2 gap-4 mt-3 md:grid-cols-3 lg:grid-cols-4">
-          {categories.map((category) => (
-            <li key={category.title}>
-              <Link href={createHref(category)}>
-                <CategoryCard category={category} />
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </Flex>
-    </>
-  )
+    return (
+        <>
+            {/* <Categories /> */}
+            <Header />
+            <Flex mt="9" justify={'center'}>
+                <ul className="grid grid-cols-2 gap-4 mt-3 md:grid-cols-3 lg:grid-cols-4">
+                    {categories.map((category) => (
+                        <li key={category.title}>
+                            <Link href={createHref(category)}>
+                                <CategoryCard category={category} />
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </Flex>
+        </>
+    )
 }
 
 export default page

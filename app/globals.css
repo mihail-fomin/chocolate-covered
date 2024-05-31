@@ -5,43 +5,43 @@
 @tailwind utilities;
 
 .loader {
-  width: 1.5rem;
-  height: 1.5rem;
-  border: 5px solid #fff;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 5px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
 }
 
 @keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .general-btn:not([disabled]) {
-  @apply bg-red-600 hover:bg-red-700;
+    @apply bg-red-600 hover:bg-red-700;
 }
 
 .general-btn:disabled {
-  @apply bg-red-200 text-slate-600;
+    @apply bg-red-200 text-slate-600;
 }
 
 .gray-btn {
-  @apply bg-slate-100 hover:bg-slate-200;
+    @apply bg-slate-100 hover:bg-slate-200;
 }
 
 .RadioGroupItem {
-  @apply w-4 h-4  bg-red-500 hover:bg-red-600;
+    @apply w-4 h-4  bg-red-500 hover:bg-red-600;
 }
 .RadioGroupItem:hover {
-  @apply bg-red-600;
+    @apply bg-red-600;
 }
 .RadioGroupItem:focus {
-  box-shadow: 0 0 0 2px black;
+    box-shadow: 0 0 0 2px black;
 }
