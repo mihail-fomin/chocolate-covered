@@ -2,12 +2,12 @@
 
 import React from 'react'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 import { Avatar, Button, Card, Dialog, Flex, Text } from '@radix-ui/themes'
 import { useAppSelector } from '../../lib/hooks'
 import Skeleton from '../Skeleton'
 import { getTotalPrice, getTotalQuantity } from '../../utils'
-import Order from '../Order/Order'
 import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 import EditQuantity from './EditQuantity'
 
@@ -78,7 +78,11 @@ const Cart = () => {
                         </Button>
                     </Dialog.Close>
 
-                    <Order disabled={products.length === 0} setOpenCart={setOpenCart} />
+                    <Link href="/preorder">
+                        <Button className="general-btn" disabled={products.length === 0}>
+                            Заказать
+                        </Button>
+                    </Link>
                 </Flex>
             </Dialog.Content>
         </Dialog.Root>

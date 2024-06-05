@@ -6,16 +6,16 @@ import { CartItem } from '@/app/lib/feature/cart/cartSlice'
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json()
-        const { productArray, orderData } = body
+        const { preorderedProducts, orderData } = body
 
         // Создаем массив объектов OrderedProduct для каждого продукта в заказе
-        const orderedProductsData = productArray.map((product: CartItem) => ({
+        const orderedProductsData = preorderedProducts.map((product: CartItem) => ({
             product: { connect: { id: product.id } }, // Связываем существующий продукт по его id
             quantity: product.quantity,
         }))
 
         // Создаем новый заказ в базе данных
-        const newOrder = await prisma.order.create({
+        await prisma.order.create({
             data: {
                 products: {
                     // Устанавливаем связанные продукты
@@ -32,6 +32,7 @@ export async function POST(req: NextRequest) {
                     },
                 },
                 receiveType: orderData.receiveType || 'PICKUP', // Устанавливаем тип получения
+                recieveDate: orderData.date,
                 comments: orderData.comments || '', // Устанавливаем комментарии
             },
             include: {
@@ -39,9 +40,8 @@ export async function POST(req: NextRequest) {
                 customer: true, // Включаем информацию о заказчике в ответ
             },
         })
-        console.log('newOrder: ', newOrder)
 
-        await sendOrder(productArray)
+        await sendOrder(preorderedProducts)
         return NextResponse.json({ success: 'Message sent' })
     } catch (error) {
         console.error(error)

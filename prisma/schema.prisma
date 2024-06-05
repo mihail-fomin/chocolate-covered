@@ -26,6 +26,7 @@ model Order {
   comments    String?
   customerId  String           @db.ObjectId
   createdAt   DateTime         @default(now())
+  recieveDate DateTime
 }
 
 model Customer {
@@ -40,12 +41,12 @@ model Customer {
 }
 
 model OrderedProduct {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  order     Order   @relation(fields: [orderId], references: [id])
-  orderId   String  @db.ObjectId
-  product   Product @relation(fields: [productId], references: [id])
-  productId String  @db.ObjectId
-  quantity  Int
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  order       Order    @relation(fields: [orderId], references: [id])
+  orderId     String   @db.ObjectId
+  product     Product  @relation(fields: [productId], references: [id])
+  productId   String   @db.ObjectId
+  quantity    Int
 }
 
 enum RecieveType {
@@ -54,7 +55,7 @@ enum RecieveType {
 }
 
 model User {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  userName String    @unique
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  userName     String @unique
   passwordHash String
 }

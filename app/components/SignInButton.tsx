@@ -7,7 +7,7 @@ import { Flex, Text, Button } from '@radix-ui/themes'
 import Skeleton from './Skeleton'
 
 const SignInButton = () => {
-    const { status, data: session } = useSession();
+    const { status, data: session } = useSession()
 
     if (status === 'loading') return <Skeleton height="1.8rem" width="4rem" />
 

@@ -3,6 +3,7 @@ import React from 'react'
 import prisma from '../utils/connect'
 import OrderItem from './OrderItem'
 import { Table } from '@radix-ui/themes'
+import dayjs from 'dayjs'
 
 type Props = {
     order: Order
@@ -17,14 +18,9 @@ const OrderInfo = async ({ order }: Props) => {
 
     return (
         <>
-            <Table.Cell>
-                {new Date(order.createdAt).toLocaleDateString('ru-Ru') +
-                    ' ' +
-                    new Date(order.createdAt).toLocaleTimeString('ru-Ru', {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                    })}
-            </Table.Cell>
+            <Table.Cell>{dayjs(order.createdAt).locale('ru').format('DD.MM.YYYY HH:mm')}</Table.Cell>
+            <Table.Cell>{dayjs(order.recieveDate).locale('ru').format('DD.MM.YYYY HH:mm')}</Table.Cell>
+
             <Table.Cell>
                 {orderedProducts.map((cartItem) => (
                     <OrderItem
@@ -33,6 +29,10 @@ const OrderInfo = async ({ order }: Props) => {
                         quantity={cartItem.quantity}
                     />
                 ))}
+            </Table.Cell>
+
+            <Table.Cell className="max-w-[20rem]">
+                {order.comments ? order.comments : '-'}
             </Table.Cell>
         </>
     )

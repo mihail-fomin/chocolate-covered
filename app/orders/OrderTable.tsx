@@ -41,8 +41,9 @@ const columns: { label: string; value: string; className?: string }[] = [
     { label: 'Этаж', value: '' },
     { label: 'Подъезд', value: '' },
     { label: 'Домофон', value: '' },
-    { label: 'Комментарий', value: '' },
     { label: 'Дата заказа', value: '' },
+    { label: 'Дата получения', value: '' },
     { label: 'Товары', value: '' },
+    { label: 'Комментарий', value: '' },
     // { label: 'Количество', value: ''},
 ]

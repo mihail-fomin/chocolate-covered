@@ -1,11 +1,21 @@
 import React from 'react'
-import { FieldErrors, UseFormRegister, UseFormWatch, FieldError } from 'react-hook-form'
+import {
+    FieldErrors,
+    UseFormRegister,
+    UseFormWatch,
+    FieldError,
+    Controller,
+    Control,
+} from 'react-hook-form'
 import { Flex, RadioGroup, Text, TextArea, TextField } from '@radix-ui/themes'
 import ErrorMessage from './ErrorMessage'
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
+import { Dayjs } from 'dayjs'
 
 type Props = {
     register: UseFormRegister<IFormValues>
     errors: FieldErrors
+    control: Control<IFormValues>
 }
 
 export type InputProps = {
@@ -32,13 +42,24 @@ export interface IFormValues {
     entrance: number
     floor: number
     intercom: string
+    date: Dayjs
     comments: string
 }
 
 const NAME_REGEX = /^[-A-ZА-Я' ]+?$/iu
 const PHONE_REGEX = /^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{7,10}$/
 
-const InputFields = ({ register, errors }: Props) => {
+const elevenAM = (day: Dayjs) => day?.set('hour', 11).startOf('hour')
+const sevenPM = (day: Dayjs) => day?.set('hour', 19).startOf('hour')
+const fivePM = (day: Dayjs) => day?.set('hour', 17).startOf('hour')
+
+const isWeekend = (date: Dayjs) => {
+    const day = date?.day()
+
+    return day === 0 || day === 6
+}
+
+const InputFields = ({ register, errors, control }: Props) => {
     const [isDeliveryFormat, setIsDeliveryFormat] = React.useState(true)
 
     return (
@@ -107,6 +128,31 @@ const InputFields = ({ register, errors }: Props) => {
                     </Flex>
                 </div>
             )}
+
+            <Controller
+                name="date"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => {
+                    const minTime = elevenAM(field.value)
+                    const maxTime = isWeekend(field.value)
+                        ? fivePM(field.value)
+                        : sevenPM(field.value)
+
+                    return (
+                        <DateTimePicker
+                            className="my-3"
+                            label="Выберите дату доставки"
+                            disablePast
+                            value={field.value}
+                            inputRef={field.ref}
+                            minTime={minTime}
+                            maxTime={maxTime}
+                            onChange={(value) => field.onChange(value)}
+                        />
+                    )
+                }}
+            />
 
             <TextArea placeholder="Комментарии к заказу" {...register('comments')}></TextArea>
         </>

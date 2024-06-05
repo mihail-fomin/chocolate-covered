@@ -1,7 +1,8 @@
-import { Order } from '@prisma/client'
 import React from 'react'
 import prisma from '../utils/connect'
+
 import { Table } from '@radix-ui/themes'
+import { Order } from '@prisma/client'
 
 type Props = {
     order: Order
@@ -26,9 +27,6 @@ const CustomerInfo = async ({ order }: Props) => {
             <Table.Cell>{customer?.floor ? customer.floor : '-'}</Table.Cell>
             <Table.Cell>{customer?.entrance ? customer.entrance : '-'}</Table.Cell>
             <Table.Cell>{customer?.intercom ? customer.intercom : '-'}</Table.Cell>
-            <Table.Cell className="max-w-[20rem]">
-                {order?.comments ? order.comments : '-'}
-            </Table.Cell>
         </>
     )
 }
