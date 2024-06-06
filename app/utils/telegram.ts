@@ -7,8 +7,8 @@ const bot = new TelegramBot(telegramToken, { polling: true })
 
 // Функция для отправки сообщения в Telegram
 async function sendTelegramMessage(message: string) {
-    // const chatId = '-1001759583869'
-    const chatId = '719127303'
+    const chatId = '-1001759583869'
+    // const chatId = '719127303'
 
     await bot
         .sendMessage(chatId, message, { parse_mode: 'HTML' })
