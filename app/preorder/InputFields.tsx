@@ -12,6 +12,14 @@ import ErrorMessage from './ErrorMessage'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { Dayjs } from 'dayjs'
 
+import {
+    elevenAM,
+    sevenPM,
+    fivePM,
+    isWeekend,
+    validateDateTime,
+} from '../utils/date'
+
 type Props = {
     register: UseFormRegister<IFormValues>
     errors: FieldErrors
@@ -48,16 +56,6 @@ export interface IFormValues {
 
 const NAME_REGEX = /^[-A-ZА-Я' ]+?$/iu
 const PHONE_REGEX = /^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{7,10}$/
-
-const elevenAM = (day: Dayjs) => day?.set('hour', 11).startOf('hour')
-const sevenPM = (day: Dayjs) => day?.set('hour', 19).startOf('hour')
-const fivePM = (day: Dayjs) => day?.set('hour', 17).startOf('hour')
-
-const isWeekend = (date: Dayjs) => {
-    const day = date?.day()
-
-    return day === 0 || day === 6
-}
 
 const InputFields = ({ register, errors, control }: Props) => {
     const [isDeliveryFormat, setIsDeliveryFormat] = React.useState(true)
@@ -132,7 +130,7 @@ const InputFields = ({ register, errors, control }: Props) => {
             <Controller
                 name="date"
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: true, validate: validateDateTime }}
                 render={({ field }) => {
                     const minTime = elevenAM(field.value)
                     const maxTime = isWeekend(field.value)
