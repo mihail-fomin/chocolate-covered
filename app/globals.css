@@ -45,3 +45,7 @@
 .RadioGroupItem:focus {
     box-shadow: 0 0 0 2px black;
 }
+
+.invalidInput {
+    @apply border-red-700 border-2;
+}

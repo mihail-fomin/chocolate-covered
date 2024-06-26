@@ -7,7 +7,7 @@ const ErrorMessage = ({ error }: { error?: FieldError }) => {
     return (
         <span className="text-red-500">
             {type === 'required' && 'Заполните данное поле'}
-            {type === 'pattern' && message}
+            {type === 'pattern' || (type === 'validate' && message)}
             {type === 'maxLength' && 'Превышена максимальная длина'}
         </span>
     )

@@ -11,14 +11,9 @@ import { Flex, RadioGroup, Text, TextArea, TextField } from '@radix-ui/themes'
 import ErrorMessage from './ErrorMessage'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { Dayjs } from 'dayjs'
+import classNames from 'classnames'
 
-import {
-    elevenAM,
-    sevenPM,
-    fivePM,
-    isWeekend,
-    validateDateTime,
-} from '../utils/date'
+import { elevenAM, sevenPM, fivePM, isWeekend, validateDateTime } from '../utils/date'
 
 type Props = {
     register: UseFormRegister<IFormValues>
@@ -57,34 +52,45 @@ export interface IFormValues {
 const NAME_REGEX = /^[-A-ZА-Я' ]+?$/iu
 const PHONE_REGEX = /^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{7,10}$/
 
+
 const InputFields = ({ register, errors, control }: Props) => {
     const [isDeliveryFormat, setIsDeliveryFormat] = React.useState(true)
 
     return (
         <>
-            <TextField.Input
-                placeholder={'Имя'}
-                {...register('name', {
-                    required: true,
-                    pattern: {
-                        value: NAME_REGEX,
-                        message: 'Имя не может содержать цифры или спецсимволы',
-                    },
-                    maxLength: 32,
-                })}
-            />
-            <ErrorMessage error={errors.name as FieldError} />
-            <TextField.Input
-                placeholder={'Телефон'}
-                {...register('phone', {
-                    required: true,
-                    pattern: {
-                        value: PHONE_REGEX,
-                        message: 'Введите корректый телефон',
-                    },
-                })}
-            />
-            <ErrorMessage error={errors.phone as FieldError} />
+            <div>
+                <TextField.Input
+                    className={classNames({
+                        invalidInput: errors.name,
+                    })}
+                    placeholder={'Имя'}
+                    {...register('name', {
+                        required: true,
+                        pattern: {
+                            value: NAME_REGEX,
+                            message: 'Имя не может содержать цифры или спецсимволы',
+                        },
+                        maxLength: 32,
+                    })}
+                />
+                <ErrorMessage error={errors.name as FieldError} />
+            </div>
+            <div>
+                <TextField.Input
+                    className={classNames({
+                        invalidInput: errors.phone,
+                    })}
+                    placeholder={'Телефон'}
+                    {...register('phone', {
+                        required: true,
+                        pattern: {
+                            value: PHONE_REGEX,
+                            message: 'Введите корректый телефон',
+                        },
+                    })}
+                />
+                <ErrorMessage error={errors.phone as FieldError} />
+            </div>
             <RadioGroup.Root defaultValue="DELIVERY" {...register('receiveType')}>
                 <Flex gap="2" direction="column">
                     <Text as="label" size="2">
@@ -112,6 +118,9 @@ const InputFields = ({ register, errors, control }: Props) => {
             {isDeliveryFormat && (
                 <div className="mt-2">
                     <TextField.Input
+                        className={classNames({
+                            invalidInput: errors.address,
+                        })}
                         placeholder="Адрес"
                         {...register('address', {
                             required: true,
@@ -139,7 +148,7 @@ const InputFields = ({ register, errors, control }: Props) => {
 
                     return (
                         <DateTimePicker
-                            className="my-3"
+                            className="mt-3"
                             label="Выберите дату доставки"
                             disablePast
                             value={field.value}
@@ -151,6 +160,7 @@ const InputFields = ({ register, errors, control }: Props) => {
                     )
                 }}
             />
+            <ErrorMessage error={errors.date as FieldError} />
 
             <TextArea placeholder="Комментарии к заказу" {...register('comments')}></TextArea>
         </>

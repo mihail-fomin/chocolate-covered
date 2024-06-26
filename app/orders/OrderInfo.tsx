@@ -18,8 +18,12 @@ const OrderInfo = async ({ order }: Props) => {
 
     return (
         <>
-            <Table.Cell>{dayjs(order.createdAt).locale('ru').format('DD.MM.YYYY HH:mm')}</Table.Cell>
-            <Table.Cell>{dayjs(order.recieveDate).locale('ru').format('DD.MM.YYYY HH:mm')}</Table.Cell>
+            <Table.Cell>
+                {dayjs(order.createdAt).locale('ru').format('DD.MM.YYYY HH:mm')}
+            </Table.Cell>
+            <Table.Cell>
+                {dayjs(order.recieveDate).locale('ru').format('DD.MM.YYYY HH:mm')}
+            </Table.Cell>
 
             <Table.Cell>
                 {orderedProducts.map((cartItem) => (

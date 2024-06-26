@@ -1,6 +1,5 @@
 import { Dayjs } from 'dayjs'
 
-
 export const elevenAM = (day: Dayjs) => day?.set('hour', 11).startOf('hour')
 export const sevenPM = (day: Dayjs) => day?.set('hour', 19).startOf('hour')
 export const fivePM = (day: Dayjs) => day?.set('hour', 17).startOf('hour')
