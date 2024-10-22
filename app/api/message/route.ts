@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
             },
         })
 
-        await sendOrder(preorderedProducts)
+        await sendOrder(preorderedProducts, orderData)
         return NextResponse.json({ success: 'Message sent' })
     } catch (error) {
         console.error(error)

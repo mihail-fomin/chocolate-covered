@@ -52,7 +52,6 @@ export interface IFormValues {
 const NAME_REGEX = /^[-A-ZА-Я' ]+?$/iu
 const PHONE_REGEX = /^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{7,10}$/
 
-
 const InputFields = ({ register, errors, control }: Props) => {
     const [isDeliveryFormat, setIsDeliveryFormat] = React.useState(true)
 
