@@ -4,5 +4,23 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        "react/react-in-jsx-scope": "off"  // Если используется Next.js, React не требуется импортировать.
+    },
+    "overrideConfig": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "parserOptions": {
+                "project": "./tsconfig.json"
+            }
+        }
     ]
 }

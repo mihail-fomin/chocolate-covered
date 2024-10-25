@@ -22,8 +22,6 @@ async function sendTelegramMessage(message: string) {
 
 // Функция для обработки массива объектов и отправки сообщений
 export const sendOrder = async (productArray: CartItem[], orderData: IFormValues) => {
-    console.log('productArray: ', productArray);
-    console.log('orderData: ', orderData);
 
     try {
         const { name, phone, address, receiveType, entrance, floor, intercom, comments } = orderData
@@ -40,7 +38,6 @@ export const sendOrder = async (productArray: CartItem[], orderData: IFormValues
         ${intercom ? `<b>Домофон:</b> <i>${intercom}</i>` : ''}
         ${comments.length ? `<b>Комментарии к заказу:</b> <i>${comments}</i>` : ''}
         <b>Товары:</b>\n`
-
 
         productArray.forEach((productItem) => {
             const productAmount = productItem.quantity

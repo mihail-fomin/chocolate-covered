@@ -6,10 +6,14 @@ import { Flex } from '@radix-ui/themes'
 import Header from '@/app/Header'
 
 interface Props {
-    params: { category: string }
+    params: Promise<{ category: string }>
 }
 
-const page = async ({ params: { category } }: Props) => {
+const page = async (props: Props) => {
+    const params = await props.params
+
+    const { category } = params
+
     const products = await prisma.product.findMany({ where: { category } })
 
     return (
