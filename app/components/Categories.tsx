@@ -1,7 +1,7 @@
 import React from 'react'
-import categories from '../public/category.json'
+import categories from '../../public/category.json'
 import { Flex, ScrollArea } from '@radix-ui/themes'
-import CategoryLink from './components/CategoryLink'
+import CategoryLink from './CategoryLink'
 
 const Categories = () => {
     return (

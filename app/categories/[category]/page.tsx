@@ -1,6 +1,6 @@
 import React from 'react'
 import prisma from '@/app/utils/connect'
-import Categories from '@/app/Categories'
+import Categories from '@/app/components/Categories'
 import { ProductCard } from '@/app/components/ProductCard'
 import { Flex } from '@radix-ui/themes'
 import Header from '@/app/Header'
